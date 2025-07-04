@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Things 3 Clone - Static Prototype">
+    <meta name="theme-color" content="#007AFF">
+    <title>Things 3 Clone - Static Prototype</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo192.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/views.css">
+    
+    <!-- Fonts -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Application Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Smart Lists Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-item active" data-view="today">
+                    <div class="sidebar-icon" style="color: var(--color-orange);">📅</div>
+                    <span class="sidebar-text">Today</span>
+                    <span class="sidebar-count">3</span>
+                </div>
+                <div class="sidebar-item" data-view="upcoming">
+                    <div class="sidebar-icon" style="color: var(--color-red);">📆</div>
+                    <span class="sidebar-text">Upcoming</span>
+                    <span class="sidebar-count">7</span>
+                </div>
+                <div class="sidebar-item" data-view="anytime">
+                    <div class="sidebar-icon" style="color: var(--color-teal);">⭐</div>
+                    <span class="sidebar-text">Anytime</span>
+                    <span class="sidebar-count">12</span>
+                </div>
+                <div class="sidebar-item" data-view="someday">
+                    <div class="sidebar-icon" style="color: var(--color-yellow);">💭</div>
+                    <span class="sidebar-text">Someday</span>
+                    <span class="sidebar-count">5</span>
+                </div>
+            </div>
+
+            <!-- Separator -->
+            <div class="sidebar-separator"></div>
+
+            <!-- Inbox Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-item" data-view="inbox">
+                    <div class="sidebar-icon" style="color: var(--color-blue);">📥</div>
+                    <span class="sidebar-text">Inbox</span>
+                    <span class="sidebar-count">2</span>
+                </div>
+            </div>
+
+            <!-- Separator -->
+            <div class="sidebar-separator"></div>
+
+            <!-- Areas & Projects Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <span>Areas</span>
+                </div>
+                <div class="sidebar-item" data-view="work-area">
+                    <div class="sidebar-icon area-icon">💼</div>
+                    <span class="sidebar-text">Work</span>
+                    <span class="sidebar-count">8</span>
+                </div>
+                <div class="sidebar-item" data-view="personal-area">
+                    <div class="sidebar-icon area-icon">🏠</div>
+                    <span class="sidebar-text">Personal</span>
+                    <span class="sidebar-count">4</span>
+                </div>
+            </div>
+
+            <!-- Separator -->
+            <div class="sidebar-separator"></div>
+
+            <!-- Archive Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-item" data-view="logbook">
+                    <div class="sidebar-icon" style="color: var(--color-green);">📚</div>
+                    <span class="sidebar-text">Logbook</span>
+                </div>
+                <div class="sidebar-item" data-view="trash">
+                    <div class="sidebar-icon" style="color: var(--color-gray-dark);">🗑️</div>
+                    <span class="sidebar-text">Trash</span>
+                </div>
+            </div>
+
+            <!-- New List Button -->
+            <div class="sidebar-footer">
+                <button class="btn-new-list">
+                    <span class="plus-icon">+</span>
+                    <span>New List</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Today View (Default Active) -->
+            <div class="view-container active" id="today-view">
+                <header class="view-header">
+                    <h1 class="view-title">Today</h1>
+                    <div class="view-actions">
+                        <button class="btn-ghost">⚙️</button>
+                    </div>
+                </header>
+
+                <div class="view-content">
+                    <!-- Calendar Events Section -->
+                    <section class="calendar-events">
+                        <h2 class="section-title">Calendar</h2>
+                        <div class="calendar-event">
+                            <div class="event-time">9:00 AM</div>
+                            <div class="event-title">Team Standup</div>
+                        </div>
+                        <div class="calendar-event">
+                            <div class="event-time">2:00 PM</div>
+                            <div class="event-title">Project Review</div>
+                        </div>
+                    </section>
+
+                    <!-- Today Tasks Section -->
+                    <section class="tasks-section">
+                        <h2 class="section-title">Today</h2>
+                        <div class="task-list">
+                            <div class="task-card">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Review quarterly goals</div>
+                                    <div class="task-notes">Check progress on Q4 objectives and plan for next quarter</div>
+                                </div>
+                            </div>
+                            <div class="task-card">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Update project documentation</div>
+                                </div>
+                            </div>
+                            <div class="task-card completed">
+                                <div class="task-checkbox checked"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Morning workout</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- This Evening Section -->
+                    <section class="tasks-section">
+                        <h2 class="section-title">This Evening</h2>
+                        <div class="task-list">
+                            <div class="task-card">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Plan tomorrow's priorities</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Quick Add Section -->
+                    <div class="quick-add-section">
+                        <div class="quick-add-hint">Press ⌘N to create a new to-do</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Views (Hidden by default) -->
+            <div class="view-container" id="inbox-view">
+                <header class="view-header">
+                    <h1 class="view-title">Inbox</h1>
+                </header>
+                <div class="view-content">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📥</div>
+                        <div class="empty-state-title">Your Inbox is empty</div>
+                        <div class="empty-state-subtitle">New tasks you create will appear here</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional views will be added here -->
+        </main>
+
+        <!-- Magic Plus Button -->
+        <button class="magic-plus-btn">
+            <span class="plus-icon">+</span>
+        </button>
+
+        <!-- Bottom Toolbar -->
+        <div class="bottom-toolbar">
+            <button class="toolbar-btn">📋</button>
+            <button class="toolbar-btn">🔍</button>
+            <button class="toolbar-btn">⚙️</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for basic interactions -->
+    <script>
+        // Basic view switching
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all sidebar items
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+
+                // Hide all views
+                document.querySelectorAll('.view-container').forEach(view => view.classList.remove('active'));
+
+                // Show corresponding view
+                const viewName = this.dataset.view;
+                const viewElement = document.getElementById(viewName + '-view');
+                if (viewElement) {
+                    viewElement.classList.add('active');
+                }
+            });
+        });
+
+        // Task checkbox interactions
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                const taskCard = this.closest('.task-card');
+                taskCard.classList.toggle('completed');
+                this.classList.toggle('checked');
+            });
+        });
+
+        // Magic plus button hover effect
+        const magicBtn = document.querySelector('.magic-plus-btn');
+        if (magicBtn) {
+            magicBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            magicBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        }
+    </script>
+</body>
+</html>
