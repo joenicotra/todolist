@@ -505,9 +505,83 @@
             <button class="toolbar-btn">🔍</button>
             <button class="toolbar-btn">⚙️</button>
         </div>
+
+        <!-- Task Creation Modal -->
+        <div class="modal-overlay" id="task-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">New To-Do</h3>
+                    <button class="modal-close" id="close-modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="input-field" id="task-title-input" placeholder="What do you want to do?" autofocus>
+                    <textarea class="input-notes" id="task-notes-input" placeholder="Notes"></textarea>
+
+                    <div class="task-options">
+                        <div class="option-group">
+                            <label class="option-label">When</label>
+                            <select class="select-field" id="task-when">
+                                <option value="inbox">Inbox</option>
+                                <option value="today">Today</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="anytime">Anytime</option>
+                                <option value="someday">Someday</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">List</label>
+                            <select class="select-field" id="task-list">
+                                <option value="none">No List</option>
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-task">Cancel</button>
+                    <button class="btn-primary" id="save-task">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Menu -->
+        <div class="context-menu" id="context-menu">
+            <div class="context-menu-item" data-action="edit">
+                <span class="context-icon">✏️</span>
+                <span>Edit</span>
+            </div>
+            <div class="context-menu-item" data-action="duplicate">
+                <span class="context-icon">📋</span>
+                <span>Duplicate</span>
+            </div>
+            <div class="context-menu-separator"></div>
+            <div class="context-menu-item" data-action="move-to-today">
+                <span class="context-icon">📅</span>
+                <span>Move to Today</span>
+            </div>
+            <div class="context-menu-item" data-action="move-to-upcoming">
+                <span class="context-icon">📆</span>
+                <span>Move to Upcoming</span>
+            </div>
+            <div class="context-menu-separator"></div>
+            <div class="context-menu-item" data-action="delete">
+                <span class="context-icon">🗑️</span>
+                <span>Delete</span>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div class="toast" id="notification-toast">
+            <div class="toast-content">
+                <span class="toast-icon">✓</span>
+                <span class="toast-message">Task completed!</span>
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript for basic interactions -->
+    <!-- JavaScript for enhanced interactions -->
     <script>
         // Basic view switching
         document.querySelectorAll('.sidebar-item').forEach(item => {
@@ -529,25 +603,194 @@
             });
         });
 
-        // Task checkbox interactions
+        // Task checkbox interactions with animation
         document.querySelectorAll('.task-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
+            checkbox.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const taskCard = this.closest('.task-card');
+                const wasCompleted = taskCard.classList.contains('completed');
+
                 taskCard.classList.toggle('completed');
                 this.classList.toggle('checked');
+
+                // Show notification
+                if (!wasCompleted) {
+                    showNotification('Task completed!', 'success');
+                    // Add completion animation
+                    taskCard.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        taskCard.style.transform = 'scale(1)';
+                    }, 150);
+                } else {
+                    showNotification('Task reopened', 'info');
+                }
             });
         });
 
-        // Magic plus button hover effect
+        // Magic plus button interactions
         const magicBtn = document.querySelector('.magic-plus-btn');
-        if (magicBtn) {
-            magicBtn.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1)';
+        const taskModal = document.getElementById('task-modal');
+
+        if (magicBtn && taskModal) {
+            magicBtn.addEventListener('click', function() {
+                taskModal.classList.add('active');
+                document.getElementById('task-title-input').focus();
             });
+
+            magicBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+
             magicBtn.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
             });
         }
+
+        // Modal interactions
+        const closeModal = document.getElementById('close-modal');
+        const cancelTask = document.getElementById('cancel-task');
+        const saveTask = document.getElementById('save-task');
+
+        function hideModal() {
+            taskModal.classList.remove('active');
+            // Clear form
+            document.getElementById('task-title-input').value = '';
+            document.getElementById('task-notes-input').value = '';
+        }
+
+        if (closeModal) closeModal.addEventListener('click', hideModal);
+        if (cancelTask) cancelTask.addEventListener('click', hideModal);
+
+        if (saveTask) {
+            saveTask.addEventListener('click', function() {
+                const title = document.getElementById('task-title-input').value.trim();
+                if (title) {
+                    // Simulate task creation
+                    showNotification('Task created!', 'success');
+                    hideModal();
+                } else {
+                    showNotification('Please enter a task title', 'error');
+                }
+            });
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && taskModal.classList.contains('active')) {
+                hideModal();
+            }
+        });
+
+        // Close modal on overlay click
+        taskModal.addEventListener('click', function(e) {
+            if (e.target === taskModal) {
+                hideModal();
+            }
+        });
+
+        // Context menu for tasks
+        const contextMenu = document.getElementById('context-menu');
+        let currentTask = null;
+
+        document.querySelectorAll('.task-card').forEach(task => {
+            task.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                currentTask = this;
+
+                contextMenu.style.left = e.pageX + 'px';
+                contextMenu.style.top = e.pageY + 'px';
+                contextMenu.classList.add('active');
+            });
+        });
+
+        // Hide context menu on click outside
+        document.addEventListener('click', function() {
+            contextMenu.classList.remove('active');
+        });
+
+        // Context menu actions
+        document.querySelectorAll('.context-menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const action = this.dataset.action;
+                if (currentTask) {
+                    handleContextAction(action, currentTask);
+                }
+                contextMenu.classList.remove('active');
+            });
+        });
+
+        function handleContextAction(action, task) {
+            switch(action) {
+                case 'edit':
+                    showNotification('Edit mode activated', 'info');
+                    break;
+                case 'duplicate':
+                    showNotification('Task duplicated', 'success');
+                    break;
+                case 'move-to-today':
+                    showNotification('Moved to Today', 'success');
+                    break;
+                case 'move-to-upcoming':
+                    showNotification('Moved to Upcoming', 'success');
+                    break;
+                case 'delete':
+                    task.style.opacity = '0';
+                    task.style.transform = 'translateX(-100%)';
+                    setTimeout(() => {
+                        task.remove();
+                        showNotification('Task deleted', 'info');
+                    }, 300);
+                    break;
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const toast = document.getElementById('notification-toast');
+            const toastMessage = toast.querySelector('.toast-message');
+            const toastIcon = toast.querySelector('.toast-icon');
+
+            toastMessage.textContent = message;
+
+            // Set icon based on type
+            switch(type) {
+                case 'success':
+                    toastIcon.textContent = '✓';
+                    break;
+                case 'error':
+                    toastIcon.textContent = '⚠️';
+                    break;
+                case 'info':
+                    toastIcon.textContent = 'ℹ️';
+                    break;
+            }
+
+            toast.classList.add('active');
+
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Cmd/Ctrl + N for new task
+            if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+                e.preventDefault();
+                magicBtn.click();
+            }
+        });
+
+        // Task hover effects
+        document.querySelectorAll('.task-card').forEach(task => {
+            task.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(0,122,255,0.05)';
+            });
+
+            task.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
     </script>
 </body>
 </html>
