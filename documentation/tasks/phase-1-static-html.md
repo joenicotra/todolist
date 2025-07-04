@@ -14,124 +14,124 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 **Estimated Time: 1 day**
 
 #### 1.1 Create HTML Foundation
-- [ ] Create `public/static-prototype.html` as main prototype file
-- [ ] Set up basic HTML5 structure with semantic markup
-- [ ] Include meta tags for responsive design and PWA readiness
-- [ ] Add favicon and basic app manifest references
+- [x] Create `public/static-prototype.html` as main prototype file
+- [x] Set up basic HTML5 structure with semantic markup
+- [x] Include meta tags for responsive design and PWA readiness
+- [x] Add favicon and basic app manifest references
 
 #### 1.2 Implement CSS Design System
-- [ ] Create `public/css/design-system.css` from JSON specification
-- [ ] Implement CSS custom properties for all colors from design system:
+- [x] Create `public/css/design-system.css` from JSON specification
+- [x] Implement CSS custom properties for all colors from design system:
   - Primary colors (#007AFF, #4A90E2, #0051D5)
   - Secondary colors (orange, red, green, teal, yellow, purple)
   - Neutral palette (white, light gray, medium gray, dark gray, charcoal, black)
   - Semantic colors (success, warning, error, info)
-- [ ] Set up typography system with font families and weights
-- [ ] Create utility classes for spacing, shadows, and border radius
-- [ ] Implement responsive breakpoints for mobile and desktop
+- [x] Set up typography system with font families and weights
+- [x] Create utility classes for spacing, shadows, and border radius
+- [x] Implement responsive breakpoints for mobile and desktop
 
 #### 1.3 Create Component CSS Classes
-- [ ] Sidebar styling (.sidebar, .sidebar-item, .sidebar-icon)
-- [ ] Task styling (.task-card, .task-checkbox, .task-text)
-- [ ] Button styling (.btn-primary, .btn-secondary, .btn-ghost)
-- [ ] Dropdown styling (.dropdown-container, .dropdown-item)
-- [ ] Card styling (.card-default, .card-highlighted)
-- [ ] Icon styling (.icon-sm, .icon-md, .icon-lg)
-- [ ] Input styling (.input-field, .input-notes)
+- [x] Sidebar styling (.sidebar, .sidebar-item, .sidebar-icon)
+- [x] Task styling (.task-card, .task-checkbox, .task-text)
+- [x] Button styling (.btn-primary, .btn-secondary, .btn-ghost)
+- [x] Dropdown styling (.dropdown-container, .dropdown-item)
+- [x] Card styling (.card-default, .card-highlighted)
+- [x] Icon styling (.icon-sm, .icon-md, .icon-lg)
+- [x] Input styling (.input-field, .input-notes)
 
 ### 2. Core Layout Structure
 **Estimated Time: 2 days**
 
 #### 2.1 Main Application Layout
-- [ ] Create two-pane layout (240px sidebar + main content)
-- [ ] Implement sidebar with fixed positioning
-- [ ] Create main content area with proper margins
-- [ ] Add bottom toolbar with button styling
-- [ ] Ensure layout works on mobile with responsive behavior
+- [x] Create two-pane layout (240px sidebar + main content)
+- [x] Implement sidebar with fixed positioning
+- [x] Create main content area with proper margins
+- [x] Add bottom toolbar with button styling
+- [x] Ensure layout works on mobile with responsive behavior
 
 #### 2.2 Sidebar Implementation
-- [ ] Create smart lists section (Inbox, Today, Upcoming, Anytime, Someday, Logbook, Trash)
-- [ ] Add sidebar icons with proper colors from design system:
+- [x] Create smart lists section (Inbox, Today, Upcoming, Anytime, Someday, Logbook, Trash)
+- [x] Add sidebar icons with proper colors from design system:
   - Inbox: #007AFF
-  - Today: #FF9500  
+  - Today: #FF9500
   - Upcoming: #FF3B30
   - Anytime: #5AC8FA
   - Someday: #FFCC00
   - Logbook: #34C759
   - Trash: #8E8E93
-- [ ] Implement areas and projects hierarchical structure
-- [ ] Add "New List" button at bottom of sidebar
-- [ ] Create hover and active states for sidebar items
+- [x] Implement areas and projects hierarchical structure
+- [x] Add "New List" button at bottom of sidebar
+- [x] Create hover and active states for sidebar items
 
 #### 2.3 Main Content Area Structure
-- [ ] Create header section with title and actions
-- [ ] Implement main content scrollable area
-- [ ] Add empty state placeholders
-- [ ] Create "Press ⌘N to create a new to-do" hint styling
+- [x] Create header section with title and actions
+- [x] Implement main content scrollable area
+- [x] Add empty state placeholders
+- [x] Create "Press ⌘N to create a new to-do" hint styling
 
 ### 3. Smart Lists Views
 **Estimated Time: 3 days**
 
 #### 3.1 Today View Implementation
-- [ ] Create Today view layout matching `full-image.png`
-- [ ] Implement calendar events section at top
-- [ ] Add "Today" tasks section with proper spacing
-- [ ] Create "This Evening" section with distinct styling
-- [ ] Add task input area with placeholder text
-- [ ] Style progress indicators and task counters
+- [x] Create Today view layout matching `full-image.png`
+- [x] Implement calendar events section at top
+- [x] Add "Today" tasks section with proper spacing
+- [x] Create "This Evening" section with distinct styling
+- [x] Add task input area with placeholder text
+- [x] Style progress indicators and task counters
 
 #### 3.2 Inbox View Implementation
-- [ ] Create empty Inbox state with proper messaging
-- [ ] Style for receiving dropped/created tasks
-- [ ] Add quick task creation interface
-- [ ] Implement task list container structure
+- [x] Create empty Inbox state with proper messaging
+- [x] Style for receiving dropped/created tasks
+- [x] Add quick task creation interface
+- [x] Implement task list container structure
 
 #### 3.3 Upcoming View Implementation
-- [ ] Create date-grouped task sections
-- [ ] Style date headers with proper typography
-- [ ] Implement expandable/collapsible date sections
-- [ ] Add drag-drop visual indicators (static)
+- [x] Create date-grouped task sections
+- [x] Style date headers with proper typography
+- [x] Implement expandable/collapsible date sections
+- [x] Add drag-drop visual indicators (static)
 
 #### 3.4 Anytime View Implementation
-- [ ] Create ungrouped task list layout
-- [ ] Add filtering/sorting visual controls
-- [ ] Style for high task volume scenarios
+- [x] Create ungrouped task list layout
+- [x] Add filtering/sorting visual controls
+- [x] Style for high task volume scenarios
 
 #### 3.5 Someday View Implementation
-- [ ] Create distinct "ideas" styling approach
-- [ ] Add visual distinction from active tasks
-- [ ] Implement looser layout for brainstorming feel
+- [x] Create distinct "ideas" styling approach
+- [x] Add visual distinction from active tasks
+- [x] Implement looser layout for brainstorming feel
 
 #### 3.6 Logbook View Implementation
-- [ ] Create completed task archive styling
-- [ ] Add date-based grouping for historical items
-- [ ] Style with muted colors to show completion
+- [x] Create completed task archive styling
+- [x] Add date-based grouping for historical items
+- [x] Style with muted colors to show completion
 
 ### 4. Task Components
 **Estimated Time: 2 days**
 
 #### 4.1 Task Card Implementation
-- [ ] Create basic task card layout with checkbox and text
-- [ ] Implement circular checkbox styling (20px, blue border)
-- [ ] Add completed state with strikethrough text
-- [ ] Style notes area with proper typography
-- [ ] Add inline editing visual states
-- [ ] Implement priority indicators
+- [x] Create basic task card layout with checkbox and text
+- [x] Implement circular checkbox styling (20px, blue border)
+- [x] Add completed state with strikethrough text
+- [x] Style notes area with proper typography
+- [x] Add inline editing visual states
+- [x] Implement priority indicators
 
 #### 4.2 Task Details Implementation
-- [ ] Create expanded task card for editing
-- [ ] Add notes area with rich text styling
-- [ ] Implement tag selection interface
-- [ ] Create date picker interface elements
-- [ ] Add checklist sub-items styling
-- [ ] Style attachment and link preview areas
+- [x] Create expanded task card for editing
+- [x] Add notes area with rich text styling
+- [x] Implement tag selection interface
+- [x] Create date picker interface elements
+- [x] Add checklist sub-items styling
+- [x] Style attachment and link preview areas
 
 #### 4.3 Magic Plus Button
-- [ ] Create floating action button (48px circle, bottom right)
-- [ ] Implement blue gradient background (#007AFF)
-- [ ] Add proper shadow (0 4px 16px rgba(0,122,255,0.3))
-- [ ] Create hover state animations
-- [ ] Add pulse/scale effects for interaction feedback
+- [x] Create floating action button (48px circle, bottom right)
+- [x] Implement blue gradient background (#007AFF)
+- [x] Add proper shadow (0 4px 16px rgba(0,122,255,0.3))
+- [x] Create hover state animations
+- [x] Add pulse/scale effects for interaction feedback
 
 ### 5. Project and Area Views
 **Estimated Time: 2 days**

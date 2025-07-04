@@ -103,10 +103,28 @@
 
             <!-- New List Button -->
             <div class="sidebar-footer">
-                <button class="btn-new-list">
-                    <span class="plus-icon">+</span>
-                    <span>New List</span>
-                </button>
+                <div class="dropdown-wrapper">
+                    <button class="btn-new-list" id="new-list-btn">
+                        <span class="plus-icon">+</span>
+                        <span>New List</span>
+                    </button>
+                    <div class="dropdown-menu" id="new-list-dropdown">
+                        <div class="dropdown-item" data-type="area">
+                            <span class="dropdown-icon">📁</span>
+                            <div class="dropdown-content">
+                                <div class="dropdown-title">New Area</div>
+                                <div class="dropdown-subtitle">A collection of projects</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" data-type="project">
+                            <span class="dropdown-icon">📋</span>
+                            <div class="dropdown-content">
+                                <div class="dropdown-title">New Project</div>
+                                <div class="dropdown-subtitle">A list of related to-dos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -115,6 +133,7 @@
             <!-- Today View (Default Active) -->
             <div class="view-container active" id="today-view">
                 <header class="view-header">
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
                     <h1 class="view-title">Today</h1>
                     <div class="view-actions">
                         <button class="btn-ghost">⚙️</button>
@@ -579,6 +598,9 @@
                 <span class="toast-message">Task completed!</span>
             </div>
         </div>
+
+        <!-- Sidebar Overlay for Mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
     </div>
 
     <!-- JavaScript for enhanced interactions -->
@@ -791,6 +813,122 @@
                 this.style.backgroundColor = '';
             });
         });
+
+        // New List Dropdown
+        const newListBtn = document.getElementById('new-list-btn');
+        const newListDropdown = document.getElementById('new-list-dropdown');
+
+        if (newListBtn && newListDropdown) {
+            newListBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                newListDropdown.classList.toggle('active');
+            });
+
+            // Handle dropdown item clicks
+            newListDropdown.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    showNotification(`Creating new ${type}...`, 'info');
+                    newListDropdown.classList.remove('active');
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                newListDropdown.classList.remove('active');
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        if (mobileMenuToggle && sidebar) {
+            mobileMenuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                document.body.classList.toggle('sidebar-open');
+            });
+
+            // Close sidebar when clicking on overlay
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    document.body.classList.remove('sidebar-open');
+                });
+            }
+
+            // Close sidebar when clicking on main content on mobile
+            document.querySelector('.main-content').addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    document.body.classList.remove('sidebar-open');
+                }
+            });
+        }
+
+        // Enhanced responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                document.body.classList.remove('sidebar-open');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // Smooth scrolling for sidebar
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Smooth scroll to top of main content
+                document.querySelector('.main-content').scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Auto-save functionality simulation
+        let autoSaveTimeout;
+        function simulateAutoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                // Simulate auto-save
+                console.log('Auto-saving...');
+            }, 2000);
+        }
+
+        // Add auto-save to input fields
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', simulateAutoSave);
+        });
+
+        // Progressive enhancement for animations
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--transition-fast', '0ms');
+            document.documentElement.style.setProperty('--transition-normal', '0ms');
+            document.documentElement.style.setProperty('--transition-slow', '0ms');
+        }
+
+        // Initialize app
+        function initializeApp() {
+            // Set initial focus
+            if (window.innerWidth > 768) {
+                document.body.classList.add('desktop');
+            }
+
+            // Add loading complete class
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100);
+        }
+
+        // Run initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
     </script>
 </body>
 </html>
