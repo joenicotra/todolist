@@ -897,3 +897,308 @@ body.loaded .app-container {
     display: none !important;
   }
 }
+
+/* Search Overlay */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-container {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 90%;
+  max-width: 600px;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-lg);
+  color: var(--color-charcoal);
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: var(--color-gray);
+}
+
+.search-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  color: var(--color-gray);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-close:hover {
+  background-color: var(--color-light-gray);
+  color: var(--color-charcoal);
+}
+
+.search-results {
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+.search-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.search-section-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: var(--spacing-xs);
+}
+
+.search-result-item:hover {
+  background-color: var(--color-light-gray);
+}
+
+.search-result-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-md);
+  font-size: var(--font-size-md);
+}
+
+.search-result-content {
+  flex: 1;
+}
+
+.search-result-title {
+  font-size: var(--font-size-md);
+  color: var(--color-charcoal);
+  margin-bottom: 2px;
+}
+
+.search-result-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+}
+
+/* Settings Panel */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-xl);
+  z-index: 2000;
+  transition: right var(--transition-normal);
+  overflow-y: auto;
+}
+
+.settings-panel.active {
+  right: 0;
+}
+
+.settings-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.settings-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.settings-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  color: var(--color-gray);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-close:hover {
+  background-color: var(--color-light-gray);
+  color: var(--color-charcoal);
+}
+
+.settings-body {
+  flex: 1;
+  padding: var(--spacing-lg);
+}
+
+.settings-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.settings-section-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.settings-option {
+  margin-bottom: var(--spacing-md);
+}
+
+.settings-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  color: var(--color-charcoal);
+}
+
+.settings-checkbox {
+  margin-right: var(--spacing-md);
+  width: 18px;
+  height: 18px;
+}
+
+/* Inline Task Editing */
+.task-card.editing {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-blue);
+  box-shadow: var(--shadow-lg);
+}
+
+.task-card.new-task {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.task-title-edit {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-charcoal);
+  background: transparent;
+  padding: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.task-title-edit::placeholder {
+  color: var(--color-gray);
+}
+
+.task-edit-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.btn-save-task,
+.btn-cancel-task {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.btn-save-task {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.btn-save-task:hover {
+  background-color: var(--color-blue-dark);
+}
+
+.btn-cancel-task {
+  background-color: transparent;
+  color: var(--color-gray);
+  border-color: var(--color-medium-gray);
+}
+
+.btn-cancel-task:hover {
+  background-color: var(--color-light-gray);
+  color: var(--color-charcoal);
+}
+
+/* Mobile adjustments for search and settings */
+@media (max-width: 768px) {
+  .search-container {
+    width: 95%;
+    margin: 0 var(--spacing-md);
+  }
+
+  .settings-panel {
+    width: 100%;
+    right: -100%;
+  }
+
+  .settings-panel.active {
+    right: 0;
+  }
+}

@@ -520,9 +520,9 @@
 
         <!-- Bottom Toolbar -->
         <div class="bottom-toolbar">
-            <button class="toolbar-btn">📋</button>
-            <button class="toolbar-btn">🔍</button>
-            <button class="toolbar-btn">⚙️</button>
+            <button class="toolbar-btn" id="projects-btn" title="Projects">📋</button>
+            <button class="toolbar-btn" id="search-btn" title="Search">🔍</button>
+            <button class="toolbar-btn" id="settings-btn" title="Settings">⚙️</button>
         </div>
 
         <!-- Task Creation Modal -->
@@ -599,6 +599,87 @@
             </div>
         </div>
 
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="search-overlay">
+            <div class="search-container">
+                <div class="search-header">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search tasks, projects, and areas..." autofocus>
+                    <button class="search-close" id="search-close">×</button>
+                </div>
+                <div class="search-results" id="search-results">
+                    <div class="search-section">
+                        <div class="search-section-title">Tasks</div>
+                        <div class="search-result-item">
+                            <div class="search-result-icon">☐</div>
+                            <div class="search-result-content">
+                                <div class="search-result-title">Review design mockups</div>
+                                <div class="search-result-subtitle">Tomorrow • Work</div>
+                            </div>
+                        </div>
+                        <div class="search-result-item">
+                            <div class="search-result-icon">☐</div>
+                            <div class="search-result-content">
+                                <div class="search-result-title">Plan Q1 objectives</div>
+                                <div class="search-result-subtitle">This Week • Work</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-section">
+                        <div class="search-section-title">Projects</div>
+                        <div class="search-result-item">
+                            <div class="search-result-icon">📋</div>
+                            <div class="search-result-content">
+                                <div class="search-result-title">Website Redesign</div>
+                                <div class="search-result-subtitle">Work • 2 tasks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settings-panel">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h3 class="settings-title">Settings</h3>
+                    <button class="settings-close" id="settings-close">×</button>
+                </div>
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <h4 class="settings-section-title">Appearance</h4>
+                        <div class="settings-option">
+                            <label class="settings-label">
+                                <input type="checkbox" class="settings-checkbox" checked>
+                                <span>Dark mode</span>
+                            </label>
+                        </div>
+                        <div class="settings-option">
+                            <label class="settings-label">
+                                <input type="checkbox" class="settings-checkbox">
+                                <span>Compact view</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4 class="settings-section-title">Notifications</h4>
+                        <div class="settings-option">
+                            <label class="settings-label">
+                                <input type="checkbox" class="settings-checkbox" checked>
+                                <span>Desktop notifications</span>
+                            </label>
+                        </div>
+                        <div class="settings-option">
+                            <label class="settings-label">
+                                <input type="checkbox" class="settings-checkbox" checked>
+                                <span>Sound effects</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Sidebar Overlay for Mobile -->
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
     </div>
@@ -649,14 +730,12 @@
             });
         });
 
-        // Magic plus button interactions
+        // Magic plus button interactions - Create inline task
         const magicBtn = document.querySelector('.magic-plus-btn');
-        const taskModal = document.getElementById('task-modal');
 
-        if (magicBtn && taskModal) {
+        if (magicBtn) {
             magicBtn.addEventListener('click', function() {
-                taskModal.classList.add('active');
-                document.getElementById('task-title-input').focus();
+                createInlineTask();
             });
 
             magicBtn.addEventListener('mouseenter', function() {
@@ -665,6 +744,113 @@
 
             magicBtn.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
+            });
+        }
+
+        // Create inline task function
+        function createInlineTask() {
+            const activeView = document.querySelector('.view-container.active');
+            if (!activeView) return;
+
+            // Find the appropriate task list in the active view
+            let taskList = activeView.querySelector('.task-list');
+            if (!taskList) {
+                // If no task list exists, create one
+                const viewContent = activeView.querySelector('.view-content');
+                if (viewContent) {
+                    taskList = document.createElement('div');
+                    taskList.className = 'task-list';
+                    viewContent.appendChild(taskList);
+                }
+            }
+
+            if (taskList) {
+                // Create new task card with inline editing
+                const newTaskCard = document.createElement('div');
+                newTaskCard.className = 'task-card editing new-task';
+                newTaskCard.innerHTML = `
+                    <div class="task-checkbox"></div>
+                    <div class="task-content">
+                        <input type="text" class="task-title-edit" placeholder="What do you want to do?" autofocus>
+                        <div class="task-edit-actions">
+                            <button class="btn-save-task">Save</button>
+                            <button class="btn-cancel-task">Cancel</button>
+                        </div>
+                    </div>
+                `;
+
+                // Insert at the top of the task list
+                taskList.insertBefore(newTaskCard, taskList.firstChild);
+
+                // Focus the input
+                const input = newTaskCard.querySelector('.task-title-edit');
+                input.focus();
+
+                // Add event listeners for save/cancel
+                setupInlineTaskEditing(newTaskCard);
+            }
+        }
+
+        // Setup inline task editing
+        function setupInlineTaskEditing(taskCard) {
+            const input = taskCard.querySelector('.task-title-edit');
+            const saveBtn = taskCard.querySelector('.btn-save-task');
+            const cancelBtn = taskCard.querySelector('.btn-cancel-task');
+
+            function saveTask() {
+                const title = input.value.trim();
+                if (title) {
+                    // Convert to regular task card
+                    taskCard.className = 'task-card';
+                    taskCard.innerHTML = `
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">${title}</div>
+                        </div>
+                    `;
+
+                    // Add checkbox functionality
+                    const checkbox = taskCard.querySelector('.task-checkbox');
+                    checkbox.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        taskCard.classList.toggle('completed');
+                        this.classList.toggle('checked');
+                        showNotification(taskCard.classList.contains('completed') ? 'Task completed!' : 'Task reopened', 'success');
+                    });
+
+                    // Add context menu
+                    taskCard.addEventListener('contextmenu', function(e) {
+                        e.preventDefault();
+                        currentTask = this;
+                        const contextMenu = document.getElementById('context-menu');
+                        contextMenu.style.left = e.pageX + 'px';
+                        contextMenu.style.top = e.pageY + 'px';
+                        contextMenu.classList.add('active');
+                    });
+
+                    showNotification('Task created!', 'success');
+                } else {
+                    cancelTask();
+                }
+            }
+
+            function cancelTask() {
+                taskCard.remove();
+            }
+
+            // Event listeners
+            saveBtn.addEventListener('click', saveTask);
+            cancelBtn.addEventListener('click', cancelTask);
+
+            // Save on Enter, cancel on Escape
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveTask();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cancelTask();
+                }
             });
         }
 
@@ -794,12 +980,107 @@
             }, 3000);
         }
 
+        // Bottom Toolbar Functionality
+        const projectsBtn = document.getElementById('projects-btn');
+        const searchBtn = document.getElementById('search-btn');
+        const settingsBtn = document.getElementById('settings-btn');
+        const searchOverlay = document.getElementById('search-overlay');
+        const settingsPanel = document.getElementById('settings-panel');
+        const searchClose = document.getElementById('search-close');
+        const settingsClose = document.getElementById('settings-close');
+        const searchInput = document.getElementById('search-input');
+
+        // Projects button - show all projects view
+        if (projectsBtn) {
+            projectsBtn.addEventListener('click', function() {
+                showNotification('Projects view coming soon!', 'info');
+                // TODO: Implement projects overview
+            });
+        }
+
+        // Search functionality
+        if (searchBtn && searchOverlay) {
+            searchBtn.addEventListener('click', function() {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+            });
+        }
+
+        if (searchClose) {
+            searchClose.addEventListener('click', function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            });
+        }
+
+        // Settings functionality
+        if (settingsBtn && settingsPanel) {
+            settingsBtn.addEventListener('click', function() {
+                settingsPanel.classList.add('active');
+            });
+        }
+
+        if (settingsClose) {
+            settingsClose.addEventListener('click', function() {
+                settingsPanel.classList.remove('active');
+            });
+        }
+
+        // Close overlays on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                searchOverlay.classList.remove('active');
+                settingsPanel.classList.remove('active');
+            }
+        });
+
+        // Close overlays on background click
+        searchOverlay.addEventListener('click', function(e) {
+            if (e.target === searchOverlay) {
+                searchOverlay.classList.remove('active');
+            }
+        });
+
+        settingsPanel.addEventListener('click', function(e) {
+            if (e.target === settingsPanel) {
+                settingsPanel.classList.remove('active');
+            }
+        });
+
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const results = document.getElementById('search-results');
+
+                if (query.length > 0) {
+                    // Simple search simulation
+                    results.style.display = 'block';
+                    // In a real app, this would filter actual data
+                } else {
+                    results.style.display = 'none';
+                }
+            });
+        }
+
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             // Cmd/Ctrl + N for new task
             if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
                 e.preventDefault();
-                magicBtn.click();
+                createInlineTask();
+            }
+
+            // Cmd/Ctrl + K for search
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchBtn.click();
+            }
+
+            // Cmd/Ctrl + , for settings
+            if ((e.metaKey || e.ctrlKey) && e.key === ',') {
+                e.preventDefault();
+                settingsBtn.click();
             }
         });
 
