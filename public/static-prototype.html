@@ -8,9 +8,9 @@
     <title>Things 3 Clone - Static Prototype</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/logo192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="logo192.png">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/design-system.css">
@@ -525,45 +525,7 @@
             <button class="toolbar-btn" id="settings-btn" title="Settings">⚙️</button>
         </div>
 
-        <!-- Task Creation Modal -->
-        <div class="modal-overlay" id="task-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">New To-Do</h3>
-                    <button class="modal-close" id="close-modal">×</button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="input-field" id="task-title-input" placeholder="What do you want to do?" autofocus>
-                    <textarea class="input-notes" id="task-notes-input" placeholder="Notes"></textarea>
-
-                    <div class="task-options">
-                        <div class="option-group">
-                            <label class="option-label">When</label>
-                            <select class="select-field" id="task-when">
-                                <option value="inbox">Inbox</option>
-                                <option value="today">Today</option>
-                                <option value="upcoming">Upcoming</option>
-                                <option value="anytime">Anytime</option>
-                                <option value="someday">Someday</option>
-                            </select>
-                        </div>
-
-                        <div class="option-group">
-                            <label class="option-label">List</label>
-                            <select class="select-field" id="task-list">
-                                <option value="none">No List</option>
-                                <option value="work">Work</option>
-                                <option value="personal">Personal</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn-secondary" id="cancel-task">Cancel</button>
-                    <button class="btn-primary" id="save-task">Save</button>
-                </div>
-            </div>
-        </div>
+        <!-- Task Creation Modal removed - now using inline editing -->
 
         <!-- Context Menu -->
         <div class="context-menu" id="context-menu">
@@ -854,47 +816,7 @@
             });
         }
 
-        // Modal interactions
-        const closeModal = document.getElementById('close-modal');
-        const cancelTask = document.getElementById('cancel-task');
-        const saveTask = document.getElementById('save-task');
-
-        function hideModal() {
-            taskModal.classList.remove('active');
-            // Clear form
-            document.getElementById('task-title-input').value = '';
-            document.getElementById('task-notes-input').value = '';
-        }
-
-        if (closeModal) closeModal.addEventListener('click', hideModal);
-        if (cancelTask) cancelTask.addEventListener('click', hideModal);
-
-        if (saveTask) {
-            saveTask.addEventListener('click', function() {
-                const title = document.getElementById('task-title-input').value.trim();
-                if (title) {
-                    // Simulate task creation
-                    showNotification('Task created!', 'success');
-                    hideModal();
-                } else {
-                    showNotification('Please enter a task title', 'error');
-                }
-            });
-        }
-
-        // Close modal on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && taskModal.classList.contains('active')) {
-                hideModal();
-            }
-        });
-
-        // Close modal on overlay click
-        taskModal.addEventListener('click', function(e) {
-            if (e.target === taskModal) {
-                hideModal();
-            }
-        });
+        // Modal interactions removed - now using inline task creation
 
         // Context menu for tasks
         const contextMenu = document.getElementById('context-menu');
