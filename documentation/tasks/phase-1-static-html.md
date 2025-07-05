@@ -248,6 +248,30 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - `documentation/static-prototype-guide.md` - Implementation documentation
 - Screenshots comparing static version to original Things 3 designs
 
+## Phase 1.5: Enhanced Interactivity (Post-Static Implementation)
+
+### 11. Inline Area and Project Creation
+#### 11.1 New Area Functionality
+- [ ] Implement inline area creation from "New Area" dropdown
+- [ ] Create area in sidebar with inline editing capability
+- [ ] Display new area view in main content area
+- [ ] Add editable notes section under area title
+- [ ] Enable click-to-edit for area name and notes
+
+#### 11.2 New Project Functionality
+- [ ] Implement inline project creation from "New Project" dropdown
+- [ ] Create project in sidebar with inline editing capability
+- [ ] Display new project view in main content area
+- [ ] Add editable notes section under project title
+- [ ] Enable click-to-edit for project name and notes
+
+#### 11.3 Enhanced Keyboard Shortcuts
+- [ ] Replace Cmd+N with Option+N for cross-browser compatibility
+- [ ] Implement context-aware task creation:
+  - [ ] Add to current view if not Logbook/Trash
+  - [ ] Add to Inbox and route there if in Logbook/Trash
+- [ ] Update keyboard shortcut documentation
+
 ## Success Criteria
 - [x] Pixel-perfect match to Things 3 design screenshots
 - [x] All colors match design system specification exactly
@@ -256,6 +280,8 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - [x] HTML is semantic and accessible
 - [x] CSS is organized and maintainable
 - [x] Load time under 2 seconds on 3G connection
+- [ ] Inline area/project creation with editable notes
+- [ ] Context-aware keyboard shortcuts working across browsers
 
 ## Dependencies
 - Design system JSON file

@@ -195,7 +195,7 @@
 
                     <!-- Quick Add Section -->
                     <div class="quick-add-section">
-                        <div class="quick-add-hint">Press ⌘N to create a new to-do</div>
+                        <div class="quick-add-hint">Press Ctrl+Shift+N to create a new to-do</div>
                     </div>
                 </div>
             </div>
@@ -753,6 +753,65 @@
             }
         }
 
+        // Context-aware task creation for keyboard shortcut
+        function createContextAwareTask() {
+            const activeView = document.querySelector('.view-container.active');
+            const currentViewId = activeView ? activeView.id : '';
+
+            // Check if we're in Logbook or Trash - if so, route to Inbox
+            if (currentViewId === 'logbook-view' || currentViewId === 'trash-view') {
+                // Switch to inbox view
+                document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+                document.querySelectorAll('.view-container').forEach(view => view.classList.remove('active'));
+
+                const inboxItem = document.querySelector('.sidebar-item[data-view="inbox"]');
+                const inboxView = document.getElementById('inbox-view');
+
+                if (inboxItem && inboxView) {
+                    inboxItem.classList.add('active');
+                    inboxView.classList.add('active');
+
+                    // Show notification about where task was created
+                    showNotification('Task added to Inbox', 'info');
+
+                    // Create task in inbox after a brief delay for view transition
+                    setTimeout(() => {
+                        createInlineTask();
+                    }, 100);
+                }
+            } else {
+                // Create task in current view
+                createInlineTask();
+
+                // Show notification about where task was created
+                const viewName = getCurrentViewName();
+                if (viewName) {
+                    showNotification(`Task added to ${viewName}`, 'info');
+                }
+            }
+        }
+
+        // Helper function to get current view name
+        function getCurrentViewName() {
+            const activeView = document.querySelector('.view-container.active');
+            if (!activeView) return null;
+
+            const viewId = activeView.id;
+            const viewNames = {
+                'today-view': 'Today',
+                'upcoming-view': 'Upcoming',
+                'anytime-view': 'Anytime',
+                'someday-view': 'Someday',
+                'inbox-view': 'Inbox',
+                'logbook-view': 'Logbook',
+                'trash-view': 'Trash',
+                'work-area-view': 'Work',
+                'personal-area-view': 'Personal'
+            };
+
+            return viewNames[viewId] || null;
+        }
+
         // Setup inline task editing
         function setupInlineTaskEditing(taskCard) {
             const input = taskCard.querySelector('.task-title-edit');
@@ -985,12 +1044,17 @@
             });
         }
 
-        // Keyboard shortcuts
+        // Enhanced keyboard shortcuts
         document.addEventListener('keydown', function(e) {
-            // Cmd/Ctrl + N for new task
-            if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+            // Skip if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            // Ctrl + Shift + N for context-aware new task (avoiding dead key issues)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'n' || e.key === 'N')) {
                 e.preventDefault();
-                createInlineTask();
+                createContextAwareTask();
             }
 
             // Cmd/Ctrl + K for search
@@ -1031,8 +1095,13 @@
             newListDropdown.querySelectorAll('.dropdown-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const type = this.dataset.type;
-                    showNotification(`Creating new ${type}...`, 'info');
                     newListDropdown.classList.remove('active');
+
+                    if (type === 'area') {
+                        createInlineArea();
+                    } else if (type === 'project') {
+                        createInlineProject();
+                    }
                 });
             });
 
@@ -1040,6 +1109,359 @@
             document.addEventListener('click', function() {
                 newListDropdown.classList.remove('active');
             });
+        }
+
+        // Create inline area function
+        function createInlineArea() {
+            // Find the areas section by looking for the "Areas" text
+            let areasSection = null;
+            const sidebarSections = document.querySelectorAll('.sidebar-section');
+            for (const section of sidebarSections) {
+                const headerSpan = section.querySelector('.sidebar-header span');
+                if (headerSpan && headerSpan.textContent.includes('Areas')) {
+                    areasSection = section;
+                    break;
+                }
+            }
+            // Fallback to last section if Areas section not found
+            if (!areasSection) {
+                areasSection = document.querySelector('.sidebar-section:last-of-type');
+            }
+
+            if (!areasSection) return;
+
+            // Generate unique ID for the area
+            const areaId = 'area-' + Date.now();
+
+            // Create new area item in sidebar
+            const newAreaItem = document.createElement('div');
+            newAreaItem.className = 'sidebar-item editing';
+            newAreaItem.dataset.view = areaId + '-view';
+            newAreaItem.innerHTML = `
+                <div class="sidebar-icon area-icon">📁</div>
+                <input type="text" class="sidebar-text-edit" placeholder="New Area" autofocus>
+                <span class="sidebar-count">0</span>
+            `;
+
+            // Insert the new area item
+            areasSection.appendChild(newAreaItem);
+
+            // Create corresponding view
+            createAreaView(areaId, 'New Area');
+
+            // Setup inline editing for the sidebar item
+            setupSidebarItemEditing(newAreaItem, 'area');
+
+            // Switch to the new area view
+            switchToView(newAreaItem);
+        }
+
+        // Create inline project function
+        function createInlineProject() {
+            // Find the current active area or default location
+            const activeAreaItem = document.querySelector('.sidebar-item.active[data-view*="area"]');
+
+            // Find the areas section by looking for the "Areas" text
+            let targetSection = null;
+            const sidebarSections = document.querySelectorAll('.sidebar-section');
+            for (const section of sidebarSections) {
+                const headerSpan = section.querySelector('.sidebar-header span');
+                if (headerSpan && headerSpan.textContent.includes('Areas')) {
+                    targetSection = section;
+                    break;
+                }
+            }
+            // Fallback to last section if Areas section not found
+            if (!targetSection) {
+                targetSection = document.querySelector('.sidebar-section:last-of-type');
+            }
+
+            // Generate unique ID for the project
+            const projectId = 'project-' + Date.now();
+
+            // Create new project item in sidebar
+            const newProjectItem = document.createElement('div');
+            newProjectItem.className = 'sidebar-item editing project-item';
+            newProjectItem.dataset.view = projectId + '-view';
+            newProjectItem.innerHTML = `
+                <div class="sidebar-icon project-icon">📋</div>
+                <input type="text" class="sidebar-text-edit" placeholder="New Project" autofocus>
+                <span class="sidebar-count">0</span>
+            `;
+
+            // If we have an active area, insert the project after it (nested)
+            if (activeAreaItem) {
+                newProjectItem.classList.add('nested-project');
+                activeAreaItem.insertAdjacentElement('afterend', newProjectItem);
+            } else {
+                targetSection.appendChild(newProjectItem);
+            }
+
+            // Create corresponding view
+            createProjectView(projectId, 'New Project');
+
+            // Setup inline editing for the sidebar item
+            setupSidebarItemEditing(newProjectItem, 'project');
+
+            // Switch to the new project view
+            switchToView(newProjectItem);
+        }
+
+        // Create area view
+        function createAreaView(areaId, areaName) {
+            const mainContent = document.querySelector('.main-content');
+            const newView = document.createElement('div');
+            newView.className = 'view-container';
+            newView.id = areaId + '-view';
+            newView.innerHTML = `
+                <div class="view-header">
+                    <h1 class="view-title editable-title" data-type="area">${areaName}</h1>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Area Options">⋯</button>
+                    </div>
+                </div>
+                <div class="view-content">
+                    <div class="area-notes editable-notes" data-placeholder="Add notes about this area..."></div>
+                    <div class="task-list"></div>
+                </div>
+            `;
+
+            mainContent.appendChild(newView);
+
+            // Setup click-to-edit for title and notes
+            setupEditableContent(newView);
+        }
+
+        // Create project view
+        function createProjectView(projectId, projectName) {
+            const mainContent = document.querySelector('.main-content');
+            const newView = document.createElement('div');
+            newView.className = 'view-container';
+            newView.id = projectId + '-view';
+            newView.innerHTML = `
+                <div class="view-header">
+                    <h1 class="view-title editable-title" data-type="project">${projectName}</h1>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </div>
+                <div class="view-content">
+                    <div class="project-notes editable-notes" data-placeholder="Add notes about this project..."></div>
+                    <div class="task-list"></div>
+                </div>
+            `;
+
+            mainContent.appendChild(newView);
+
+            // Setup click-to-edit for title and notes
+            setupEditableContent(newView);
+        }
+
+        // Setup sidebar item editing
+        function setupSidebarItemEditing(sidebarItem, type) {
+            const input = sidebarItem.querySelector('.sidebar-text-edit');
+            const icon = sidebarItem.querySelector('.sidebar-icon');
+
+            if (!input) return;
+
+            function saveItem() {
+                const newName = input.value.trim();
+                if (newName) {
+                    // Replace input with span
+                    const span = document.createElement('span');
+                    span.className = 'sidebar-text';
+                    span.textContent = newName;
+                    input.replaceWith(span);
+
+                    // Update the corresponding view title
+                    const viewId = sidebarItem.dataset.view;
+                    const view = document.getElementById(viewId);
+                    if (view) {
+                        const viewTitle = view.querySelector('.view-title');
+                        if (viewTitle) viewTitle.textContent = newName;
+                    }
+
+                    // Remove editing class
+                    sidebarItem.classList.remove('editing');
+
+                    // Show success notification
+                    showNotification(`${type.charAt(0).toUpperCase() + type.slice(1)} "${newName}" created!`, 'success');
+                } else {
+                    cancelItem();
+                }
+            }
+
+            function cancelItem() {
+                // Remove the item and its view
+                const viewId = sidebarItem.dataset.view;
+                const view = document.getElementById(viewId);
+                if (view) view.remove();
+                sidebarItem.remove();
+            }
+
+            // Event listeners
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveItem();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cancelItem();
+                }
+            });
+
+            input.addEventListener('blur', saveItem);
+        }
+
+        // Setup editable content (titles and notes)
+        function setupEditableContent(viewElement) {
+            const editableTitle = viewElement.querySelector('.editable-title');
+            const editableNotes = viewElement.querySelector('.editable-notes');
+
+            // Setup title editing
+            if (editableTitle) {
+                editableTitle.addEventListener('click', function() {
+                    if (this.classList.contains('editing')) return;
+
+                    const currentText = this.textContent;
+                    this.classList.add('editing');
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'title-edit-input';
+                    input.value = currentText;
+
+                    this.innerHTML = '';
+                    this.appendChild(input);
+                    input.focus();
+                    input.select();
+
+                    function saveTitle() {
+                        const newTitle = input.value.trim();
+                        if (newTitle) {
+                            editableTitle.textContent = newTitle;
+                            editableTitle.classList.remove('editing');
+
+                            // Update sidebar text
+                            const viewId = viewElement.id;
+                            const sidebarItem = document.querySelector(`[data-view="${viewId}"]`);
+                            if (sidebarItem) {
+                                const sidebarText = sidebarItem.querySelector('.sidebar-text');
+                                if (sidebarText) sidebarText.textContent = newTitle;
+                            }
+                        } else {
+                            editableTitle.textContent = currentText;
+                            editableTitle.classList.remove('editing');
+                        }
+                    }
+
+                    function cancelTitle() {
+                        editableTitle.textContent = currentText;
+                        editableTitle.classList.remove('editing');
+                    }
+
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            saveTitle();
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            cancelTitle();
+                        }
+                    });
+
+                    input.addEventListener('blur', saveTitle);
+                });
+            }
+
+            // Setup notes editing
+            if (editableNotes) {
+                // Show placeholder when empty
+                if (!editableNotes.textContent.trim()) {
+                    editableNotes.classList.add('empty');
+                    editableNotes.textContent = editableNotes.dataset.placeholder || 'Add notes...';
+                }
+
+                editableNotes.addEventListener('click', function() {
+                    if (this.classList.contains('editing')) return;
+
+                    const currentText = this.classList.contains('empty') ? '' : this.textContent;
+                    this.classList.add('editing');
+                    this.classList.remove('empty');
+
+                    const textarea = document.createElement('textarea');
+                    textarea.className = 'notes-edit-textarea';
+                    textarea.value = currentText;
+                    textarea.placeholder = this.dataset.placeholder || 'Add notes...';
+
+                    this.innerHTML = '';
+                    this.appendChild(textarea);
+                    textarea.focus();
+
+                    // Auto-resize textarea
+                    function autoResize() {
+                        textarea.style.height = 'auto';
+                        textarea.style.height = textarea.scrollHeight + 'px';
+                    }
+
+                    textarea.addEventListener('input', autoResize);
+                    autoResize();
+
+                    function saveNotes() {
+                        const newNotes = textarea.value.trim();
+                        editableNotes.classList.remove('editing');
+
+                        if (newNotes) {
+                            editableNotes.textContent = newNotes;
+                        } else {
+                            editableNotes.classList.add('empty');
+                            editableNotes.textContent = editableNotes.dataset.placeholder || 'Add notes...';
+                        }
+                    }
+
+                    function cancelNotes() {
+                        editableNotes.classList.remove('editing');
+                        if (currentText) {
+                            editableNotes.textContent = currentText;
+                        } else {
+                            editableNotes.classList.add('empty');
+                            editableNotes.textContent = editableNotes.dataset.placeholder || 'Add notes...';
+                        }
+                    }
+
+                    textarea.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape') {
+                            e.preventDefault();
+                            cancelNotes();
+                        }
+                        // Allow Cmd/Ctrl+Enter to save
+                        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+                            e.preventDefault();
+                            saveNotes();
+                        }
+                    });
+
+                    textarea.addEventListener('blur', saveNotes);
+                });
+            }
+        }
+
+        // Switch to view helper
+        function switchToView(sidebarItem) {
+            // Remove active class from all sidebar items
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            // Add active class to clicked item
+            sidebarItem.classList.add('active');
+
+            // Hide all views
+            document.querySelectorAll('.view-container').forEach(view => view.classList.remove('active'));
+
+            // Show corresponding view
+            const viewName = sidebarItem.dataset.view;
+            const viewElement = document.getElementById(viewName);
+            if (viewElement) {
+                viewElement.classList.add('active');
+            }
         }
 
         // Mobile Menu Toggle
