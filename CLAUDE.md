@@ -78,3 +78,6 @@ This is a comprehensive Things 3 clone that combines elegant individual producti
 - **Collaboration First**: All features designed for both individual and team use
 - **Performance**: Target <1s load time, <200ms real-time sync
 - **Testing**: 100% test coverage requirement per user instructions
+
+# Pull Request Workflow
+- When user requests to create a PR after finishing work, always follow this complete workflow: 1) Update changelog with detailed release notes, 2) Commit all changes with comprehensive commit message, 3) Push to feature branch, 4) Create pull request with detailed description - never push directly to main branch.
