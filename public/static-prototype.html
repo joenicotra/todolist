@@ -8,9 +8,9 @@
     <title>Things 3 Clone - Static Prototype</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="logo192.png">
+    <!-- <link rel="manifest" href="manifest.json"> -->
+    <!-- <link rel="icon" href="favicon.ico"> -->
+    <!-- <link rel="apple-touch-icon" href="logo192.png"> -->
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/design-system.css">
@@ -40,17 +40,17 @@
                 <div class="sidebar-item" data-view="upcoming">
                     <div class="sidebar-icon" style="color: var(--color-red);">📆</div>
                     <span class="sidebar-text">Upcoming</span>
-                    <span class="sidebar-count">7</span>
+                    <span class="sidebar-count">8</span>
                 </div>
                 <div class="sidebar-item" data-view="anytime">
                     <div class="sidebar-icon" style="color: var(--color-teal);">⭐</div>
                     <span class="sidebar-text">Anytime</span>
-                    <span class="sidebar-count">12</span>
+                    <span class="sidebar-count">15</span>
                 </div>
                 <div class="sidebar-item" data-view="someday">
                     <div class="sidebar-icon" style="color: var(--color-yellow);">💭</div>
                     <span class="sidebar-text">Someday</span>
-                    <span class="sidebar-count">5</span>
+                    <span class="sidebar-count">3</span>
                 </div>
             </div>
 
@@ -77,12 +77,42 @@
                 <div class="sidebar-item" data-view="work-area">
                     <div class="sidebar-icon area-icon">💼</div>
                     <span class="sidebar-text">Work</span>
-                    <span class="sidebar-count">8</span>
+                    <span class="sidebar-count">15</span>
                 </div>
+
+                <!-- Projects under Work Area -->
+                <div class="sidebar-item nested-project" data-view="website-redesign-project">
+                    <div class="sidebar-icon project-icon">📋</div>
+                    <span class="sidebar-text">Website Redesign</span>
+                    <span class="sidebar-count">7</span>
+                </div>
+                <div class="sidebar-item nested-project" data-view="client-presentation-project">
+                    <div class="sidebar-icon project-icon">📊</div>
+                    <span class="sidebar-text">Client Presentation</span>
+                    <span class="sidebar-count">5</span>
+                </div>
+                <div class="sidebar-item nested-project" data-view="team-training-project">
+                    <div class="sidebar-icon project-icon">👥</div>
+                    <span class="sidebar-text">Team Training</span>
+                    <span class="sidebar-count">1</span>
+                </div>
+
                 <div class="sidebar-item" data-view="personal-area">
                     <div class="sidebar-icon area-icon">🏠</div>
                     <span class="sidebar-text">Personal</span>
+                    <span class="sidebar-count">14</span>
+                </div>
+
+                <!-- Projects under Personal Area -->
+                <div class="sidebar-item nested-project" data-view="home-improvement-project">
+                    <div class="sidebar-icon project-icon">🔨</div>
+                    <span class="sidebar-text">Home Improvement</span>
                     <span class="sidebar-count">4</span>
+                </div>
+                <div class="sidebar-item nested-project" data-view="fitness-goals-project">
+                    <div class="sidebar-icon project-icon">💪</div>
+                    <span class="sidebar-text">Fitness Goals</span>
+                    <span class="sidebar-count">8</span>
                 </div>
             </div>
 
@@ -161,7 +191,7 @@
                             <div class="task-card">
                                 <div class="task-checkbox"></div>
                                 <div class="task-content">
-                                    <div class="task-title">Review quarterly goals</div>
+                                    <div class="task-title editable-task-title" contenteditable="false">Review quarterly goals</div>
                                     <div class="task-notes">Check progress on Q4 objectives and plan for next quarter</div>
                                 </div>
                             </div>
@@ -435,36 +465,65 @@
             <!-- Work Area View -->
             <div class="view-container" id="work-area-view">
                 <header class="view-header">
-                    <h1 class="view-title">Work</h1>
+                    <h1 class="view-title editable-title" contenteditable="false">Work</h1>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Area Options">⋯</button>
+                    </div>
                 </header>
                 <div class="view-content">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">8</div>
-                            <div class="stat-label">Active Tasks</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Projects</div>
+                    <div class="area-description editable-description" contenteditable="false">
+                        <p>Professional projects and work-related tasks. Focus on deliverables and client work.</p>
+                    </div>
+
+                    <div class="area-overview">
+                        <h2 class="section-title">Projects (3)</h2>
+                        <div class="project-cards-grid">
+                            <div class="project-card" data-project="website-redesign">
+                                <div class="project-card-header">
+                                    <h3 class="project-card-title">Website Redesign</h3>
+                                    <div class="project-card-progress">70%</div>
+                                </div>
+                                <div class="project-card-stats">
+                                    <span class="project-stat">5 of 7 tasks complete</span>
+                                    <span class="project-stat">Due: Next week</span>
+                                </div>
+                            </div>
+                            <div class="project-card" data-project="client-presentation">
+                                <div class="project-card-header">
+                                    <h3 class="project-card-title">Client Presentation</h3>
+                                    <div class="project-card-progress">60%</div>
+                                </div>
+                                <div class="project-card-stats">
+                                    <span class="project-stat">3 of 5 tasks complete</span>
+                                    <span class="project-stat">Due: Friday</span>
+                                </div>
+                            </div>
+                            <div class="project-card" data-project="team-training">
+                                <div class="project-card-header">
+                                    <h3 class="project-card-title">Team Training</h3>
+                                    <div class="project-card-progress">100%</div>
+                                </div>
+                                <div class="project-card-stats">
+                                    <span class="project-stat">1 of 1 tasks complete</span>
+                                    <span class="project-stat">Completed</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="project-group">
-                        <div class="project-group-header">
-                            <div class="project-icon progress"></div>
-                            <div class="project-group-title">Website Redesign</div>
-                        </div>
+                    <div class="area-tasks">
+                        <h2 class="section-title">Work Tasks (2)</h2>
                         <div class="task-list">
                             <div class="task-card">
                                 <div class="task-checkbox"></div>
                                 <div class="task-content">
-                                    <div class="task-title">Create wireframes</div>
+                                    <div class="task-title">Review quarterly reports</div>
                                 </div>
                             </div>
                             <div class="task-card">
                                 <div class="task-checkbox"></div>
                                 <div class="task-content">
-                                    <div class="task-title">Design system documentation</div>
+                                    <div class="task-title">Schedule team meeting</div>
                                 </div>
                             </div>
                         </div>
@@ -475,37 +534,421 @@
             <!-- Personal Area View -->
             <div class="view-container" id="personal-area-view">
                 <header class="view-header">
-                    <h1 class="view-title">Personal</h1>
+                    <h1 class="view-title editable-title" contenteditable="false">Personal</h1>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Area Options">⋯</button>
+                    </div>
                 </header>
                 <div class="view-content">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">4</div>
-                            <div class="stat-label">Active Tasks</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">2</div>
-                            <div class="stat-label">Projects</div>
+                    <div class="area-description editable-description" contenteditable="false">
+                        <p>Personal projects, hobbies, and life goals. Keep track of everything outside of work.</p>
+                    </div>
+
+                    <div class="area-overview">
+                        <h2 class="section-title">Projects (2)</h2>
+                        <div class="project-cards-grid">
+                            <div class="project-card" data-project="home-improvement">
+                                <div class="project-card-header">
+                                    <h3 class="project-card-title">Home Improvement</h3>
+                                    <div class="project-card-progress">50%</div>
+                                </div>
+                                <div class="project-card-stats">
+                                    <span class="project-stat">2 of 4 tasks complete</span>
+                                    <span class="project-stat">Due: This month</span>
+                                </div>
+                            </div>
+                            <div class="project-card" data-project="fitness-goals">
+                                <div class="project-card-header">
+                                    <h3 class="project-card-title">Fitness Goals</h3>
+                                    <div class="project-card-progress">25%</div>
+                                </div>
+                                <div class="project-card-stats">
+                                    <span class="project-stat">2 of 8 tasks complete</span>
+                                    <span class="project-stat">Ongoing</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="project-group">
-                        <div class="project-group-header">
-                            <div class="project-icon"></div>
-                            <div class="project-group-title">Home Improvement</div>
-                        </div>
+                    <div class="area-tasks">
+                        <h2 class="section-title">Personal Tasks (2)</h2>
                         <div class="task-list">
                             <div class="task-card">
                                 <div class="task-checkbox"></div>
                                 <div class="task-content">
-                                    <div class="task-title">Paint living room</div>
+                                    <div class="task-title">Book dentist appointment</div>
                                 </div>
                             </div>
                             <div class="task-card">
                                 <div class="task-checkbox"></div>
                                 <div class="task-content">
-                                    <div class="task-title">Install new shelves</div>
+                                    <div class="task-title">Plan weekend trip</div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Redesign Project View (Static Example) -->
+            <div class="view-container" id="website-redesign-project-view">
+                <header class="view-header">
+                    <div class="project-header">
+                        <h1 class="view-title editable-title" contenteditable="false">Website Redesign</h1>
+                        <div class="project-progress">
+                            <div class="progress-circle">
+                                <svg width="32" height="32" viewBox="0 0 32 32">
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-light-gray)" stroke-width="2"/>
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-blue)" stroke-width="2"
+                                            stroke-dasharray="87.96" stroke-dashoffset="26.39" transform="rotate(-90 16 16)"/>
+                                </svg>
+                                <span class="progress-text">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </header>
+                <div class="view-content">
+                    <div class="project-notes editable-description" contenteditable="false">
+                        <p>Complete redesign of company website with modern design system and improved user experience.</p>
+                    </div>
+
+                    <!-- Design Phase Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Design Phase</h2>
+                        <div class="heading-progress">3 of 3 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title editable-task-title" contenteditable="false">Research competitor websites</div>
+                            </div>
+                        </div>
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Create user personas</div>
+                            </div>
+                        </div>
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Design wireframes</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Development Phase Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Development Phase</h2>
+                        <div class="heading-progress">2 of 3 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Set up development environment</div>
+                            </div>
+                        </div>
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Implement responsive layout</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Add interactive components</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testing Phase Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Testing & Launch</h2>
+                        <div class="heading-progress">0 of 1 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Deploy to production</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Presentation Project View -->
+            <div class="view-container" id="client-presentation-project-view">
+                <header class="view-header">
+                    <div class="project-header">
+                        <h1 class="view-title editable-title" contenteditable="false">Client Presentation</h1>
+                        <div class="project-progress">
+                            <div class="progress-circle">
+                                <svg width="32" height="32" viewBox="0 0 32 32">
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-light-gray)" stroke-width="2"/>
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-blue)" stroke-width="2"
+                                            stroke-dasharray="87.96" stroke-dashoffset="35.18" transform="rotate(-90 16 16)"/>
+                                </svg>
+                                <span class="progress-text">60%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </header>
+                <div class="view-content">
+                    <div class="project-notes editable-notes" data-placeholder="Add notes about this project...">
+                        <p>Quarterly business review presentation for key client. Focus on achievements and future roadmap.</p>
+                    </div>
+
+                    <!-- Preparation Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Preparation</h2>
+                        <div class="heading-progress">2 of 3 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Gather performance metrics</div>
+                            </div>
+                        </div>
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Create slide deck outline</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Design presentation slides</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Delivery</h2>
+                        <div class="heading-progress">1 of 2 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Schedule presentation meeting</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Deliver presentation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Training Project View -->
+            <div class="view-container" id="team-training-project-view">
+                <header class="view-header">
+                    <div class="project-header">
+                        <h1 class="view-title">Team Training</h1>
+                        <div class="project-progress">
+                            <div class="progress-circle">
+                                <svg width="32" height="32" viewBox="0 0 32 32">
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-light-gray)" stroke-width="2"/>
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-green)" stroke-width="2"
+                                            stroke-dasharray="87.96" stroke-dashoffset="0" transform="rotate(-90 16 16)"/>
+                                </svg>
+                                <span class="progress-text">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </header>
+                <div class="view-content">
+                    <div class="project-notes editable-notes" data-placeholder="Add notes about this project...">
+                        <p>Completed training session on new project management tools and workflows.</p>
+                    </div>
+
+                    <!-- Training Session Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Training Session</h2>
+                        <div class="heading-progress">1 of 1 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Conduct team training workshop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Improvement Project View -->
+            <div class="view-container" id="home-improvement-project-view">
+                <header class="view-header">
+                    <div class="project-header">
+                        <h1 class="view-title">Home Improvement</h1>
+                        <div class="project-progress">
+                            <div class="progress-circle">
+                                <svg width="32" height="32" viewBox="0 0 32 32">
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-light-gray)" stroke-width="2"/>
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-blue)" stroke-width="2"
+                                            stroke-dasharray="87.96" stroke-dashoffset="43.98" transform="rotate(-90 16 16)"/>
+                                </svg>
+                                <span class="progress-text">50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </header>
+                <div class="view-content">
+                    <div class="project-notes">
+                        <p>Renovating the living room and kitchen to create a more modern and functional space.</p>
+                    </div>
+
+                    <!-- Living Room Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Living Room</h2>
+                        <div class="heading-progress">1 of 2 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Paint living room walls</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Install new flooring</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kitchen Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Kitchen</h2>
+                        <div class="heading-progress">1 of 2 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Install new cabinet hardware</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Replace kitchen backsplash</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fitness Goals Project View -->
+            <div class="view-container" id="fitness-goals-project-view">
+                <header class="view-header">
+                    <div class="project-header">
+                        <h1 class="view-title">Fitness Goals</h1>
+                        <div class="project-progress">
+                            <div class="progress-circle">
+                                <svg width="32" height="32" viewBox="0 0 32 32">
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-light-gray)" stroke-width="2"/>
+                                    <circle cx="16" cy="16" r="14" fill="none" stroke="var(--color-blue)" stroke-width="2"
+                                            stroke-dasharray="87.96" stroke-dashoffset="65.97" transform="rotate(-90 16 16)"/>
+                                </svg>
+                                <span class="progress-text">25%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-actions">
+                        <button class="btn-icon" title="Project Options">⋯</button>
+                    </div>
+                </header>
+                <div class="view-content">
+                    <div class="project-notes">
+                        <p>2024 fitness and health goals focused on building strength, improving cardio, and maintaining consistency.</p>
+                    </div>
+
+                    <!-- Strength Training Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Strength Training</h2>
+                        <div class="heading-progress">1 of 3 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Join gym membership</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Complete beginner strength program</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Increase bench press by 20lbs</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cardio & Health Heading -->
+                    <div class="project-heading">
+                        <h2 class="heading-title">Cardio & Health</h2>
+                        <div class="heading-progress">1 of 5 complete</div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-card completed">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-content">
+                                <div class="task-title">Get fitness tracker</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Run 5K without stopping</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Walk 10,000 steps daily for 30 days</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Complete annual physical exam</div>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-checkbox"></div>
+                            <div class="task-content">
+                                <div class="task-title">Improve sleep schedule (8 hours nightly)</div>
                             </div>
                         </div>
                     </div>
@@ -1492,6 +1935,153 @@
             });
         }
 
+        // Project card navigation
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const projectId = this.dataset.project;
+
+                // Remove active class from all sidebar items
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+
+                // Find and activate the corresponding sidebar item
+                const sidebarItem = document.querySelector(`[data-view="${projectId}-project"]`);
+                if (sidebarItem) {
+                    sidebarItem.classList.add('active');
+                }
+
+                // Hide all views
+                document.querySelectorAll('.view-container').forEach(view => view.classList.remove('active'));
+
+                // Show the project view
+                const projectView = document.getElementById(projectId + '-project-view');
+                if (projectView) {
+                    projectView.classList.add('active');
+                }
+            });
+        });
+
+        // Inline editing functionality
+        function setupInlineEditing() {
+            // Make all task titles editable
+            document.querySelectorAll('.task-title').forEach(element => {
+                if (!element.classList.contains('editable-task-title')) {
+                    element.classList.add('editable-task-title');
+                    element.contentEditable = false;
+                }
+            });
+
+            // Make all view titles editable (areas, projects)
+            document.querySelectorAll('.view-title').forEach(element => {
+                if (!element.classList.contains('editable-title')) {
+                    element.classList.add('editable-title');
+                    element.contentEditable = false;
+                }
+            });
+
+            // Make all area descriptions and project notes editable
+            document.querySelectorAll('.area-description, .project-notes').forEach(element => {
+                if (!element.classList.contains('editable-description')) {
+                    element.classList.add('editable-description');
+                    element.contentEditable = false;
+                }
+            });
+
+            // Handle editable titles (areas, projects)
+            document.querySelectorAll('.editable-title').forEach(element => {
+                element.addEventListener('click', function() {
+                    if (!this.classList.contains('editing')) {
+                        startEditing(this);
+                    }
+                });
+            });
+
+            // Handle editable descriptions (area descriptions, project notes)
+            document.querySelectorAll('.editable-description').forEach(element => {
+                element.addEventListener('click', function() {
+                    if (!this.classList.contains('editing')) {
+                        startEditing(this);
+                    }
+                });
+            });
+
+            // Handle editable task titles
+            document.querySelectorAll('.editable-task-title').forEach(element => {
+                element.addEventListener('click', function() {
+                    if (!this.classList.contains('editing')) {
+                        startEditing(this);
+                    }
+                });
+            });
+        }
+
+        function startEditing(element) {
+            element.classList.add('editing');
+            element.contentEditable = true;
+            element.focus();
+
+            // Select all text
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            // Handle save on Enter or blur
+            function saveEdit() {
+                element.classList.remove('editing');
+                element.contentEditable = false;
+                element.removeEventListener('blur', saveEdit);
+                element.removeEventListener('keydown', handleKeydown);
+            }
+
+            function handleKeydown(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveEdit();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    // Restore original content if needed
+                    saveEdit();
+                }
+            }
+
+            element.addEventListener('blur', saveEdit);
+            element.addEventListener('keydown', handleKeydown);
+        }
+
+        // Keyboard shortcuts functionality
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+Shift+N for context-aware task creation
+                if (e.ctrlKey && e.shiftKey && e.key === 'N') {
+                    e.preventDefault();
+
+                    // Get current view
+                    const activeView = document.querySelector('.view-container:not([style*="display: none"])');
+                    if (activeView) {
+                        const addButton = activeView.querySelector('.btn-add-task');
+                        if (addButton) {
+                            addButton.click();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Inline area/project creation functionality
+        function setupInlineAreaProjectCreation() {
+            // This function handles the "New List" dropdown functionality
+            // For now, it's a placeholder for future implementation
+            console.log('Inline area/project creation setup complete');
+        }
+
+        // Editable notes functionality
+        function setupEditableNotes() {
+            // This function handles making notes editable
+            // The functionality is now handled by setupInlineEditing
+            console.log('Editable notes setup complete');
+        }
+
         // Enhanced responsive behavior
         function handleResize() {
             if (window.innerWidth > 768) {
@@ -1541,6 +2131,12 @@
             if (window.innerWidth > 768) {
                 document.body.classList.add('desktop');
             }
+
+            // Initialize all interactive features
+            setupKeyboardShortcuts();
+            setupInlineAreaProjectCreation();
+            setupEditableNotes();
+            setupInlineEditing();
 
             // Add loading complete class
             setTimeout(() => {

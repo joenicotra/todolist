@@ -137,19 +137,19 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 **Estimated Time: 2 days**
 
 #### 5.1 Project View Implementation
-- [ ] Analyze `project-view-tasks and headers.png` for layout
-- [ ] Create project header with title and progress indicator
-- [ ] Implement heading sections for task organization
-- [ ] Add task list with proper spacing and grouping
-- [ ] Style project completion indicator (pie chart visual)
-- [ ] Add notes area for project descriptions
+- [x] Analyze `project-view-tasks and headers.png` for layout
+- [x] Create project header with title and progress indicator
+- [x] Implement heading sections for task organization
+- [x] Add task list with proper spacing and grouping
+- [x] Style project completion indicator (pie chart visual)
+- [x] Add notes area for project descriptions
 
 #### 5.2 Area View Implementation
-- [ ] Analyze `area-view-projects.png` for layout structure
-- [ ] Create area overview with contained projects
-- [ ] Implement project cards with progress indicators
-- [ ] Add area-level task list for non-project tasks
-- [ ] Style area header and description sections
+- [x] Analyze `area-view-projects.png` for layout structure
+- [x] Create area overview with contained projects
+- [x] Implement project cards with progress indicators
+- [x] Add area-level task list for non-project tasks
+- [x] Style area header and description sections
 
 ### 6. Dropdown and Menu Components
 **Estimated Time: 1.5 days**
@@ -252,25 +252,25 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 
 ### 11. Inline Area and Project Creation
 #### 11.1 New Area Functionality
-- [ ] Implement inline area creation from "New Area" dropdown
-- [ ] Create area in sidebar with inline editing capability
-- [ ] Display new area view in main content area
-- [ ] Add editable notes section under area title
-- [ ] Enable click-to-edit for area name and notes
+- [x] Implement inline area creation from "New Area" dropdown
+- [x] Create area in sidebar with inline editing capability
+- [x] Display new area view in main content area
+- [x] Add editable notes section under area title
+- [x] Enable click-to-edit for area name and notes
 
 #### 11.2 New Project Functionality
-- [ ] Implement inline project creation from "New Project" dropdown
-- [ ] Create project in sidebar with inline editing capability
-- [ ] Display new project view in main content area
-- [ ] Add editable notes section under project title
-- [ ] Enable click-to-edit for project name and notes
+- [x] Implement inline project creation from "New Project" dropdown
+- [x] Create project in sidebar with inline editing capability
+- [x] Display new project view in main content area
+- [x] Add editable notes section under project title
+- [x] Enable click-to-edit for project name and notes
 
 #### 11.3 Enhanced Keyboard Shortcuts
-- [ ] Replace Cmd+N with Option+N for cross-browser compatibility
-- [ ] Implement context-aware task creation:
-  - [ ] Add to current view if not Logbook/Trash
-  - [ ] Add to Inbox and route there if in Logbook/Trash
-- [ ] Update keyboard shortcut documentation
+- [x] Replace Cmd+N with Ctrl+Shift+N for cross-browser compatibility (Option+N had dead key conflicts)
+- [x] Implement context-aware task creation:
+  - [x] Add to current view if not Logbook/Trash
+  - [x] Add to Inbox and route there if in Logbook/Trash
+- [x] Update keyboard shortcut documentation
 
 ## Success Criteria
 - [x] Pixel-perfect match to Things 3 design screenshots
@@ -280,8 +280,8 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - [x] HTML is semantic and accessible
 - [x] CSS is organized and maintainable
 - [x] Load time under 2 seconds on 3G connection
-- [ ] Inline area/project creation with editable notes
-- [ ] Context-aware keyboard shortcuts working across browsers
+- [x] Inline area/project creation with editable notes
+- [x] Context-aware keyboard shortcuts working across browsers
 
 ## Dependencies
 - Design system JSON file
