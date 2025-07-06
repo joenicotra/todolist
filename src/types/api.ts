@@ -4,8 +4,9 @@ import { TaskFilters, SortOptions } from './ui';
 // Base API response types
 export interface ApiResponse<T> {
   data: T;
-  success: boolean;
-  message?: string;
+  status: number;
+  statusText: string;
+  headers: Record<string, string>;
 }
 
 export interface PaginatedResponse<T> {
@@ -21,7 +22,20 @@ export interface PaginatedResponse<T> {
 export interface ApiError {
   code: string;
   message: string;
+  status?: number;
   details?: Record<string, any>;
+  timestamp: string;
+}
+
+// Request configuration types
+export interface RequestConfig {
+  method: string;
+  url: string;
+  headers: Record<string, string>;
+  data?: any;
+  params?: Record<string, any>;
+  signal?: AbortSignal;
+  timeout?: number;
 }
 
 // Request types
