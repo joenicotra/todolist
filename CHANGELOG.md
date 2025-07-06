@@ -7,6 +7,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-07-06
+
+### Added
+- Complete Redux store architecture with Redux Toolkit
+- Comprehensive TypeScript type definitions for all entities (User, Organization, Area, Project, Task)
+- Five core Redux slices with normalized state management:
+  - Authentication slice with user state and login/logout actions
+  - Tasks slice with CRUD operations and filtering capabilities
+  - Projects slice with hierarchical relationships and status management
+  - Areas slice with project organization and reordering support
+  - UI slice with navigation, modal states, and error handling
+- Memoized selectors using createSelector for optimal performance
+- Smart list selectors for Today, Upcoming, Inbox, Anytime, Someday views
+- Hierarchical data selectors for Areas → Projects → Tasks relationships
+- Type-safe Redux hooks (useAppDispatch, useAppSelector)
+- Complete project structure with organized component folders
+- Strict TypeScript configuration with exactOptionalPropertyTypes enabled
+
+### Changed
+- Converted Create React App from JavaScript to TypeScript with strict mode
+- Updated all file extensions from .js to .tsx for React components
+- Enhanced tsconfig.json with absolute imports and path mapping
+- Organized codebase with proper folder structure and barrel exports
+
+### Fixed
+- All TypeScript compilation errors with strict mode enabled
+- Module resolution issues with proper import path configuration
+- Type safety violations in Redux state management
+- Optional property type handling with exactOptionalPropertyTypes
+- Selector type guards for handling potentially undefined values
+
+### Technical
+- Implemented normalized state pattern for efficient data access
+- Added Redux DevTools configuration for development debugging
+- Created comprehensive type definitions for UI, API, and event types
+- Set up service interface contracts for future backend integration
+- Configured absolute imports with @ prefix for organized module resolution
+- Established proper TypeScript strict mode compliance
+
+### Completed
+- Phase 2 Sections 1-3: React Project Setup & Redux Store - 100% COMPLETE
+  - ✅ TypeScript conversion and configuration
+  - ✅ Core dependency installation and setup
+  - ✅ Complete type definitions and interfaces
+  - ✅ Redux store architecture with all slices
+  - ✅ Memoized selectors and computed state
+  - ✅ Type-safe hooks and development tools
+
+### Task Progress Update (2025-07-06)
+**Phase 2 React Components & Service Interfaces - IN PROGRESS:**
+
+#### ✅ Completed Sections (3/13):
+1. **React Project Setup & Configuration** - 100% complete
+   - TypeScript conversion, dependency installation, project structure
+2. **Type Definitions & Interfaces** - 100% complete
+   - Core data types, UI types, service interfaces
+3. **Redux Store Setup** - 100% complete
+   - Store configuration, all slices, selectors and computed state
+
+#### 🔄 Next Section:
+4. **Service Layer Implementation** - Ready to begin
+   - Base service setup, mock implementations, service interfaces
+
 ## [0.3.0] - 2025-07-06
 
 ### Added
@@ -148,10 +211,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - ✅ Enhanced keyboard shortcuts and context-aware task creation
 - **Next**: Phase 2 React component conversion
 
-### 🔄 Phase 2: React Components & Service Interfaces (PLANNED)
-- **Duration**: 15 days  
-- **Status**: Ready to begin
+### 🔄 Phase 2: React Components & Service Interfaces (IN PROGRESS)
+- **Duration**: 15 days
+- **Status**: 3/13 sections complete (23% complete)
 - **Objective**: Convert to React + TypeScript with Redux state management
+- **Completed**: TypeScript setup, type definitions, Redux store architecture
+- **Next**: Service layer implementation and Layout components
 
 ### 📋 Phase 3: Supabase Authentication (PLANNED)
 - **Duration**: 8 days
