@@ -183,3 +183,28 @@ export const selectNotifications = createSelector(
   [selectUI],
   (ui) => ui.notifications
 );
+
+export const selectGlobalError = createSelector(
+  [selectUI],
+  (ui) => ui.errors.global
+);
+
+export const selectGlobalLoading = createSelector(
+  [selectUI],
+  (ui) => ui.loading.global
+);
+
+export const selectTasksLoading = createSelector(
+  [selectUI],
+  (ui) => ui.loading.tasks
+);
+
+export const selectProjectsLoading = createSelector(
+  [selectUI],
+  (ui) => ui.loading.projects
+);
+
+export const selectAreasLoading = createSelector(
+  [selectUI],
+  (ui) => ui.loading.areas
+);
