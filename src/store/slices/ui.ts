@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type ViewType = 'inbox' | 'today' | 'upcoming' | 'anytime' | 'someday' | 'logbook' | 'trash' | 'area' | 'project';
 
 interface NavigationState {
-  currentView: ViewType;
+  currentView: string; // Allow any string to handle area-123, project-456 etc.
   currentAreaId: string | undefined;
   currentProjectId: string | undefined;
   breadcrumbs: Array<{ label: string; path: string }>;
@@ -86,7 +86,7 @@ const uiSlice = createSlice({
   initialState,
   reducers: {
     // Navigation
-    setCurrentView: (state, action: PayloadAction<{ view: ViewType; areaId?: string; projectId?: string }>) => {
+    setCurrentView: (state, action: PayloadAction<{ view: string; areaId?: string; projectId?: string }>) => {
       const { view, areaId, projectId } = action.payload;
       state.navigation.currentView = view;
       state.navigation.currentAreaId = areaId;

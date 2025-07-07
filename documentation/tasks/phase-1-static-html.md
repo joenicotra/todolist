@@ -8,6 +8,16 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - Analyze all PNG screenshots in `/documentation/design/` for layout patterns
 - Reference `/documentation/master-prd.md` for feature requirements
 
+## Design Reference Screenshots
+
+### Core Interface Elements
+
+![Edit Task In Place](../design/edit-task-in-place.png)
+*Inline task editing functionality*
+
+![New Project Creation](../design/new-project.png)
+*Project creation workflow*
+
 ## Task Breakdown
 
 ### 1. Project Setup & Design System Implementation
@@ -73,7 +83,10 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 **Estimated Time: 3 days**
 
 #### 3.1 Today View Implementation
-- [x] Create Today view layout matching `full-image.png`
+- [x] Create Today view layout matching the full application design:
+
+![Things 3 Full Interface](../design/full-image.png)
+
 - [x] Implement calendar events section at top
 - [x] Add "Today" tasks section with proper spacing
 - [x] Create "This Evening" section with distinct styling
@@ -137,7 +150,10 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 **Estimated Time: 2 days**
 
 #### 5.1 Project View Implementation
-- [x] Analyze `project-view-tasks and headers.png` for layout
+- [x] Analyze project view layout:
+
+![Project View with Tasks and Headers](../design/project-view-tasks%20and%20headers.png)
+
 - [x] Create project header with title and progress indicator
 - [x] Implement heading sections for task organization
 - [x] Add task list with proper spacing and grouping
@@ -145,7 +161,10 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - [x] Add notes area for project descriptions
 
 #### 5.2 Area View Implementation
-- [x] Analyze `area-view-projects.png` for layout structure
+- [x] Analyze area view layout:
+
+![Area View with Projects](../design/area-view-projects.png)
+
 - [x] Create area overview with contained projects
 - [x] Implement project cards with progress indicators
 - [x] Add area-level task list for non-project tasks
@@ -155,7 +174,10 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 **Estimated Time: 1.5 days**
 
 #### 6.1 Area Dropdown Menu
-- [x] Analyze `area-dropdown.png` for exact styling
+- [x] Analyze area dropdown styling:
+
+![Area Dropdown Menu](../design/area-dropdown.png)
+
 - [x] Create dark background dropdown (#3C3C43)
 - [x] Implement white text on dark background
 - [x] Add "Add Tags", "Delete Area", "Share..." options
@@ -163,14 +185,20 @@ Create a pixel-perfect static HTML implementation of the Things 3 interface usin
 - [x] Add menu separators and icons
 
 #### 6.2 New List Dropdown
-- [x] Analyze `new-list-dropdown.png` for layout
+- [x] Analyze new list dropdown layout:
+
+![New List Dropdown](../design/new-list-dropdown.png)
+
 - [x] Create "New Project" and "New Area" sections
 - [x] Add descriptive text for each option
 - [x] Style with proper background and shadows
 - [x] Implement hover states for menu items
 
 #### 6.3 New Project Menu
-- [x] Analyze `new-project-menu.png` for functionality
+- [x] Analyze new project menu functionality:
+
+![New Project Menu](../design/new-project-menu.png)
+
 - [x] Create context menu for project actions
 - [x] Add options: Complete Project, When, Add Tags, Add Deadline, Move, Repeat, Duplicate Project, Delete Project, Share
 - [x] Style with dark theme consistency
