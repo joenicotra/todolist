@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../ui/icon';
+import ProjectProgressIcon from '../ui/ProjectProgressIcon';
 
 interface SidebarItemProps {
   id: string;
@@ -11,6 +12,10 @@ interface SidebarItemProps {
   hasChildren?: boolean;
   iconColor?: string;
   onClick: () => void;
+  // Project progress props
+  completionPercentage?: number;
+  isProjectCompleted?: boolean;
+  onProjectComplete?: () => void;
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
@@ -23,20 +28,23 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   hasChildren = false,
   iconColor = 'text-things-charcoal',
   onClick,
+  completionPercentage,
+  isProjectCompleted = false,
+  onProjectComplete,
 }) => {
   const baseClasses = `
     flex items-center
     px-3 py-1.5 text-sm font-normal
     cursor-pointer
     transition-colors duration-150
-    hover:bg-white hover:bg-opacity-50
-    text-things-charcoal
+    hover:bg-background hover:bg-opacity-50
+    text-secondary
     w-full text-left border-none bg-transparent
     rounded-md mx-2
   `.trim();
 
   const activeClasses = isActive
-    ? 'bg-white shadow-things'
+    ? 'bg-background shadow-things'
     : '';
 
   const childClasses = isChild ? 'ml-4' : '';
@@ -62,26 +70,36 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       aria-pressed={isActive}
       data-testid={`sidebar-item-${id}`}
     >
-      <Icon
-        type={icon.length === 1 || icon.includes('📥') || icon.includes('⭐') || icon.includes('🌙') || icon.includes('📅') || icon.includes('📋') || icon.includes('📚') || icon.includes('🗑️') ? 'emoji' : 'circle'}
-        value={icon}
-        color={iconColor}
-        className="mr-3"
-      />
+      {icon === 'project' && completionPercentage !== undefined ? (
+        <ProjectProgressIcon
+          completionPercentage={completionPercentage}
+          size="sm"
+          className="mr-3"
+          isCompleted={isProjectCompleted}
+          onComplete={onProjectComplete}
+        />
+      ) : (
+        <Icon
+          type={icon.length === 1 || icon.includes('📥') || icon.includes('⭐') || icon.includes('🌙') || icon.includes('📅') || icon.includes('📋') || icon.includes('📚') || icon.includes('🗑️') ? 'emoji' : 'circle'}
+          value={icon}
+          color={iconColor}
+          className="mr-3"
+        />
+      )}
       <span className="truncate flex-1 min-w-0 text-left">
         {name}
       </span>
 
       {/* Count badge */}
       {count !== undefined && count > 0 && (
-        <span className="ml-2 text-xs text-things-dark-gray">
+        <span className="ml-2 text-xs text-tertiary">
           {count}
         </span>
       )}
 
       {/* Expand/collapse indicator for items with children */}
       {hasChildren && (
-        <span className="ml-2 text-things-dark-gray">
+        <span className="ml-2 text-tertiary">
           <svg
             className="w-3 h-3"
             fill="none"

@@ -14,14 +14,14 @@ const Header: React.FC<HeaderProps> = ({
   actions,
 }) => {
   return (
-    <div className="sticky top-0 z-10 bg-white border-b border-things-medium-gray px-6 py-4">
+    <div className="sticky top-0 z-10 bg-background border-b border-default px-6 py-4">
       <div className="flex items-center justify-between">
         {/* Left side - Menu button and title */}
         <div className="flex items-center">
           {showMenuButton && (
             <button
               onClick={onToggleSidebar}
-              className="mr-4 p-2 text-things-dark-gray hover:text-things-charcoal hover:bg-things-light-gray rounded-md transition-colors duration-150"
+              className="mr-4 p-2 text-tertiary hover:text-secondary hover:bg-surface rounded-md transition-colors duration-150"
               aria-label="Toggle sidebar"
             >
               <svg
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          <h1 className="text-xl font-medium text-things-charcoal">
+          <h1 className="text-xl font-medium text-secondary">
             {title}
           </h1>
         </div>

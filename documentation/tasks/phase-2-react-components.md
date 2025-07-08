@@ -235,11 +235,13 @@ Convert the static HTML prototype to a fully functional React application with T
 #### 5.4 Navigation Logic
 - [x] Set up Redux-based navigation system
 - [x] Implement navigation handlers
+- [ ] **CRITICAL:** Connect sidebar navigation to view switching
+- [ ] **CRITICAL:** Implement functional smart list filtering
 - [x] Create view-based component rendering
 - [x] Add current view state management
 
 ### 6. Task Components 🚧
-**Estimated Time: 3 days** | **In Progress**
+**Estimated Time: 3 days** | **In Progress - Critical Issues Found**
 
 #### 6.1 Task Card Component
 - [x] Create `src/components/Task/Task.tsx`:
@@ -255,8 +257,8 @@ Convert the static HTML prototype to a fully functional React application with T
 - [x] Implement checkbox functionality with Lucide React icons
 - [x] Create hover states and interactions
 - [x] Add proper task completion styling
-- [ ] Add inline editing capabilities
-- [ ] Add keyboard shortcuts (Enter to edit, Escape to cancel)
+- [x] Add inline editing capabilities
+- [x] Add keyboard shortcuts (Enter to edit, Escape to cancel)
 
 #### 6.2 Task List Component
 - [x] Create `src/components/Task/TaskGroup.tsx`:
@@ -266,10 +268,12 @@ Convert the static HTML prototype to a fully functional React application with T
   - Task organization by categories
 - [x] Implement proper task rendering
 - [x] Add task interaction handling
-- [ ] Add drag-and-drop integration
+- [x] Add drag-and-drop integration
+- [ ] **CRITICAL:** Fix task completion state updates (checkboxes not working)
+- [ ] **CRITICAL:** Connect task actions to Redux store properly
 - [ ] Add virtualized list for performance
-- [ ] Add bulk operations
-- [ ] Create task creation inline
+- [x] Add bulk operations
+- [x] Create task creation inline
 
 #### 6.3 Task Details Component
 - [ ] Create `src/components/Tasks/TaskDetails.tsx`:
@@ -413,16 +417,77 @@ Convert the static HTML prototype to a fully functional React application with T
 - [ ] Implement proper loading states
 - [ ] Add performance monitoring
 
-### 13. Development Tools & Quality
+### 13. Critical Bug Fixes (Browser Testing Results)
+**Estimated Time: 1 day** | **PRIORITY: URGENT**
+
+#### 13.1 Task Interaction Bugs
+- [ ] **CRITICAL:** Fix task checkbox completion - clicks not updating state
+- [ ] **CRITICAL:** Verify task editing functionality works in browser
+- [ ] **CRITICAL:** Test task creation workflow end-to-end
+- [ ] **CRITICAL:** Fix drag-and-drop visual feedback
+
+#### 13.2 Navigation Bugs  
+- [ ] **CRITICAL:** Fix sidebar navigation - Today/Upcoming/etc buttons not changing views
+- [ ] **CRITICAL:** Implement actual view switching logic
+- [ ] **CRITICAL:** Connect Redux UI state to view rendering
+- [ ] **CRITICAL:** Test all smart list filters work correctly
+
+#### 13.3 Integration Testing
+- [ ] **CRITICAL:** Test complete user workflows with browser automation
+- [ ] **CRITICAL:** Verify all interactive elements respond properly
+- [ ] **CRITICAL:** Test responsive design on different screen sizes
+- [ ] **CRITICAL:** Validate accessibility with screen readers
+
+### 14. Enhanced UI Features & Functionality
+**Estimated Time: 3 days** | **PRIORITY: HIGH**
+
+#### 14.1 New List Creation
+- [ ] **HIGH:** Add "New List" button in lower left corner
+- [ ] **HIGH:** Implement dropdown menu for adding area or project
+- [ ] **HIGH:** Style dropdown to match Things 3 design
+- [ ] **HIGH:** Connect dropdown actions to Redux store
+
+#### 14.2 Navigation Improvements
+- [ ] **HIGH:** Fix area view → project navigation (clicking project should navigate to project view)
+- [ ] **HIGH:** Implement project view component with proper navigation
+- [ ] **HIGH:** Add breadcrumb navigation for deep views
+- [ ] **HIGH:** Test all navigation paths work correctly
+
+#### 14.3 Enhanced Task Interactions
+- [ ] **HIGH:** Make + button in lower right functional
+- [ ] **HIGH:** Implement task completion animation:
+  - Click task → gray out and strike through text
+  - Wait 3 seconds
+  - Ease out from view with smooth animation
+- [ ] **HIGH:** Add proper task completion state management
+- [ ] **HIGH:** Test task completion workflow end-to-end
+
+#### 14.4 Project Progress Indicators
+- [ ] **HIGH:** Add project completion status indicator in sidebar
+- [ ] **HIGH:** Implement square icon with stroke fill based on completion percentage
+- [ ] **HIGH:** Change square to green when 100% complete with check functionality
+- [ ] **HIGH:** Add project progress indicator in main content area
+- [ ] **HIGH:** Make sidebar indicators slightly smaller but same functionality
+- [ ] **HIGH:** Calculate completion percentage from associated tasks
+
+#### 14.5 Dark Mode Implementation
+- [ ] **MEDIUM:** Implement dark mode toggle component
+- [ ] **MEDIUM:** Create dark mode color palette matching Things 3
+- [ ] **MEDIUM:** Add dark mode styles to all components
+- [ ] **MEDIUM:** Store dark mode preference in localStorage
+- [ ] **MEDIUM:** Add smooth transitions between light/dark modes
+- [ ] **MEDIUM:** Test dark mode across all views and components
+
+### 15. Development Tools & Quality
 **Estimated Time: 0.5 days**
 
-#### 13.1 Developer Experience
+#### 15.1 Developer Experience
 - [ ] Set up ESLint with TypeScript rules
 - [ ] Configure Prettier for code formatting
 - [ ] Set up Husky for git hooks
 - [ ] Add bundle analyzer for optimization
 
-#### 13.2 Debugging Tools
+#### 15.2 Debugging Tools
 - [ ] Configure Redux DevTools
 - [ ] Set up React DevTools Profiler
 - [ ] Add React Query DevTools
@@ -442,10 +507,11 @@ Convert the static HTML prototype to a fully functional React application with T
 - [x] Redux state management working correctly
 - [x] Service layer ready for backend integration
 - [x] Layout components fully functional with proper styling
-- [x] Task components with interactive functionality
-- [ ] 80% test coverage on all components
-- [ ] Performance metrics: < 2s initial load, < 100ms interaction response
-- [ ] Accessibility compliance (WCAG 2.1 AA)
+- [ ] **FAILING:** Task components with interactive functionality (browser testing shows critical bugs)
+- [ ] **FAILING:** Functional navigation between smart lists
+- [ ] **MISSING:** 80% test coverage on all components
+- [ ] **NOT TESTED:** Performance metrics: < 2s initial load, < 100ms interaction response
+- [ ] **NOT TESTED:** Accessibility compliance (WCAG 2.1 AA)
 
 ## Dependencies
 - Completed Phase 1 static HTML

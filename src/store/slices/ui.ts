@@ -26,6 +26,9 @@ interface UIState {
     isCollapsed: boolean;
     width: number;
   };
+  theme: {
+    isDarkMode: boolean;
+  };
   loading: {
     global: boolean;
     tasks: boolean;
@@ -65,6 +68,9 @@ const initialState: UIState = {
   sidebar: {
     isCollapsed: false,
     width: 280,
+  },
+  theme: {
+    isDarkMode: false,
   },
   loading: {
     global: false,
@@ -136,6 +142,14 @@ const uiSlice = createSlice({
       state.sidebar.width = action.payload;
     },
     
+    // Theme
+    toggleDarkMode: (state) => {
+      state.theme.isDarkMode = !state.theme.isDarkMode;
+    },
+    setDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.theme.isDarkMode = action.payload;
+    },
+    
     // Loading states
     setGlobalLoading: (state, action: PayloadAction<boolean>) => {
       state.loading.global = action.payload;
@@ -201,6 +215,8 @@ export const {
   closeAreaModal,
   toggleSidebar,
   setSidebarWidth,
+  toggleDarkMode,
+  setDarkMode,
   setGlobalLoading,
   setTasksLoading,
   setProjectsLoading,

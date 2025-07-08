@@ -67,7 +67,7 @@ This is a comprehensive Things 3 clone that combines elegant individual producti
 
 ### Feature Development Process
 1. Reference `/documentation/app-template.md` for implementation patterns
-2. Use design system from `/documentation/design/things3-design-system.json`
+3. get yourself up to speed with the entire 'documentation'
 3. Follow component architecture outlined in documentation
 4. Maintain test coverage with React Testing Library
 5. Run `npm run build` to verify production builds
@@ -81,3 +81,8 @@ This is a comprehensive Things 3 clone that combines elegant individual producti
 
 # Pull Request Workflow
 - When user requests to create a PR after finishing work, always follow this complete workflow: 1) Update changelog with detailed release notes, 2) Commit all changes with comprehensive commit message, 3) Push to feature branch, 4) Create pull request with detailed description - never push directly to main branch.
+
+## AI Workflow Memories
+- Make sure when starting the new chat to review all the files in the @documentation/ folder with all the contents and sub folders prior to writing any code
+- Upon completing each task make sure to test the website. the MCP Docker mcp server has the playwright functionality built in, please make sure to remember that you are in a docker container so the context to get at the locally running site is a bit different
+- When using the docker mcp for using the playwright functionality make sure to use google chrome which is installed for your default browser

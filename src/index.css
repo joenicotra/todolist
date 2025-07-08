@@ -17,13 +17,44 @@
   --color-yellow: #FFCC00;
   --color-purple: #AF52DE;
 
-  /* Neutral Colors */
+  /* Neutral Colors - Light Mode */
   --color-white: #FFFFFF;
   --color-light-gray: #F2F2F7;
   --color-medium-gray: #E5E5EA;
   --color-dark-gray: #8E8E93;
   --color-charcoal: #3C3C43;
   --color-black: #000000;
+
+  /* Semantic Colors - Light Mode */
+  --color-background: #FFFFFF;
+  --color-surface: #F2F2F7;
+  --color-surface-secondary: #E5E5EA;
+  --color-text-primary: #000000;
+  --color-text-secondary: #3C3C43;
+  --color-text-tertiary: #8E8E93;
+  --color-border: #E5E5EA;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode */
+.dark {
+  /* Neutral Colors - Dark Mode */
+  --color-white: #1C1C1E;
+  --color-light-gray: #2C2C2E;
+  --color-medium-gray: #3A3A3C;
+  --color-dark-gray: #8E8E93;
+  --color-charcoal: #EBEBF5;
+  --color-black: #FFFFFF;
+
+  /* Semantic Colors - Dark Mode */
+  --color-background: #000000;
+  --color-surface: #1C1C1E;
+  --color-surface-secondary: #2C2C2E;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #EBEBF5;
+  --color-text-tertiary: #8E8E93;
+  --color-border: #3A3A3C;
+  --color-shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* Base Typography */
@@ -65,9 +96,18 @@ body {
 /* Border color utilities */
 .border-things-medium-gray { border-color: var(--color-medium-gray); }
 
+/* Semantic color utilities */
+.bg-background { background-color: var(--color-background); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-secondary { background-color: var(--color-surface-secondary); }
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.border-default { border-color: var(--color-border); }
+
 /* Shadow utilities */
-.shadow-things { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); }
-.shadow-things-hover { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); }
+.shadow-things { box-shadow: 0 1px 3px var(--color-shadow), 0 1px 2px var(--color-shadow); }
+.shadow-things-hover { box-shadow: 0 4px 6px var(--color-shadow), 0 2px 4px var(--color-shadow); }
 
 /* Hide scrollbars */
 .hide-scrollbar::-webkit-scrollbar {

@@ -54,6 +54,10 @@ const authSlice = createSlice({
         state.user = { ...state.user, ...action.payload };
       }
     },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
   },
 });
 
@@ -64,6 +68,7 @@ export const {
   logout,
   clearError,
   updateUser,
+  setUser,
 } = authSlice.actions;
 
 export default authSlice.reducer;
