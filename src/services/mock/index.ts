@@ -281,11 +281,21 @@ export class MockStorage {
 // Initialize mock data if not exists
 export const initializeMockData = (): void => {
   if (!MockStorage.get(STORAGE_KEYS.USER)) {
-    const dataset = MockDataGenerator.generateCompleteDataset();
+    // Use realistic data instead of random generated data
+    const { RealMockData } = require('./realData');
+    const dataset = RealMockData.getCompleteDataset();
+    
     MockStorage.set(STORAGE_KEYS.USER, dataset.user);
     MockStorage.set(STORAGE_KEYS.AREAS, dataset.areas);
     MockStorage.set(STORAGE_KEYS.PROJECTS, dataset.projects);
     MockStorage.set(STORAGE_KEYS.TASKS, dataset.tasks);
     MockStorage.set(STORAGE_KEYS.AUTH_TOKEN, 'mock_jwt_token_' + Date.now());
+    
+    console.log('Initialized realistic mock data:', {
+      user: dataset.user.name,
+      areas: dataset.areas.length,
+      projects: dataset.projects.length,
+      tasks: dataset.tasks.length
+    });
   }
 };

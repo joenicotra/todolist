@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type ViewType = 'inbox' | 'today' | 'upcoming' | 'anytime' | 'someday' | 'logbook' | 'trash' | 'area' | 'project';
 
 interface NavigationState {
-  currentView: ViewType;
+  currentView: string; // Allow any string to handle area-123, project-456 etc.
   currentAreaId: string | undefined;
   currentProjectId: string | undefined;
   breadcrumbs: Array<{ label: string; path: string }>;
@@ -25,6 +25,9 @@ interface UIState {
   sidebar: {
     isCollapsed: boolean;
     width: number;
+  };
+  theme: {
+    isDarkMode: boolean;
   };
   loading: {
     global: boolean;
@@ -66,6 +69,9 @@ const initialState: UIState = {
     isCollapsed: false,
     width: 280,
   },
+  theme: {
+    isDarkMode: false,
+  },
   loading: {
     global: false,
     tasks: false,
@@ -86,7 +92,7 @@ const uiSlice = createSlice({
   initialState,
   reducers: {
     // Navigation
-    setCurrentView: (state, action: PayloadAction<{ view: ViewType; areaId?: string; projectId?: string }>) => {
+    setCurrentView: (state, action: PayloadAction<{ view: string; areaId?: string; projectId?: string }>) => {
       const { view, areaId, projectId } = action.payload;
       state.navigation.currentView = view;
       state.navigation.currentAreaId = areaId;
@@ -134,6 +140,14 @@ const uiSlice = createSlice({
     },
     setSidebarWidth: (state, action: PayloadAction<number>) => {
       state.sidebar.width = action.payload;
+    },
+    
+    // Theme
+    toggleDarkMode: (state) => {
+      state.theme.isDarkMode = !state.theme.isDarkMode;
+    },
+    setDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.theme.isDarkMode = action.payload;
     },
     
     // Loading states
@@ -201,6 +215,8 @@ export const {
   closeAreaModal,
   toggleSidebar,
   setSidebarWidth,
+  toggleDarkMode,
+  setDarkMode,
   setGlobalLoading,
   setTasksLoading,
   setProjectsLoading,

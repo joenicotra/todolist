@@ -52,10 +52,10 @@ const tasksSlice = createSlice({
         state.allIds.push(task.id);
       }
     },
-    updateTask: (state, action: PayloadAction<{ id: string; updates: Partial<Task> }>) => {
-      const { id, updates } = action.payload;
+    updateTask: (state, action: PayloadAction<{ id: string; changes: Partial<Task> }>) => {
+      const { id, changes } = action.payload;
       if (state.byId[id]) {
-        state.byId[id] = { ...state.byId[id], ...updates };
+        state.byId[id] = { ...state.byId[id], ...changes };
       }
     },
     removeTask: (state, action: PayloadAction<string>) => {

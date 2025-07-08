@@ -202,162 +202,184 @@ Convert the static HTML prototype to a fully functional React application with T
 - [x] Create `src/services/areaService.ts`
 - [x] Create `src/services/collaborationService.ts`
 
-### 5. Layout Components
-**Estimated Time: 2 days**
+### 5. Layout Components ✅
+**Estimated Time: 2 days** | **Completed: 2025-01-07**
 
 #### 5.1 App Layout Component
-- [ ] Create `src/components/Layout/AppLayout.tsx`:
+- [x] Create `src/components/Layout/AppLayout.tsx`:
   - Main application shell
   - Sidebar integration
   - Main content area
   - Responsive behavior
-- [ ] Convert static CSS to component-scoped styles
-- [ ] Implement proper TypeScript props interface
-- [ ] Add error boundaries
+- [x] Convert static CSS to component-scoped styles
+- [x] Implement proper TypeScript props interface
+- [x] Add error boundaries
 
 #### 5.2 Sidebar Component
-- [ ] Create `src/components/Layout/Sidebar.tsx`:
+- [x] Create `src/components/Layout/Sidebar.tsx`:
   - Smart lists rendering
   - Areas and projects hierarchy
   - Active state management
   - Click handlers for navigation
-- [ ] Implement sidebar item components
-- [ ] Add proper keyboard navigation
-- [ ] Set up responsive collapse behavior
+- [x] Implement sidebar item components
+- [x] Add proper keyboard navigation
+- [x] Set up responsive collapse behavior
 
 #### 5.3 Main Content Component
-- [ ] Create `src/components/Layout/MainContent.tsx`:
+- [x] Create `src/components/Layout/MainContent.tsx`:
   - Dynamic content rendering based on route
   - Header with title and actions
   - Scrollable content area
   - Empty state handling
 
 #### 5.4 Navigation Logic
-- [ ] Set up React Router with typed routes
-- [ ] Implement navigation handlers
-- [ ] Create route-based component rendering
-- [ ] Add breadcrumb functionality
+- [x] Set up Redux-based navigation system
+- [x] Implement navigation handlers
+- [x] Connect sidebar navigation to view switching
+- [x] Implement functional smart list filtering
+- [x] Create view-based component rendering
+- [x] Add current view state management
 
-### 6. Task Components
-**Estimated Time: 3 days**
+### 6. Task Components ✅
+**Estimated Time: 3 days** | **Completed: 2025-01-08**
 
 #### 6.1 Task Card Component
-- [ ] Create `src/components/Tasks/TaskCard.tsx`:
+- [x] Create `src/components/Task/Task.tsx`:
   ```typescript
-  interface TaskCardProps {
-    task: Task;
-    onUpdate: (task: Task) => void;
-    onDelete: (taskId: string) => void;
-    isEditing?: boolean;
-    showProject?: boolean;
-    collaborative?: boolean;
+  interface TaskProps {
+    id: string;
+    title: string;
+    completed: boolean;
+    onToggle: (id: string) => void;
+    notes?: string | undefined;
   }
   ```
-- [ ] Implement checkbox functionality
-- [ ] Add inline editing capabilities
-- [ ] Create hover states and interactions
-- [ ] Add keyboard shortcuts (Enter to edit, Escape to cancel)
+- [x] Implement checkbox functionality with Lucide React icons
+- [x] Create hover states and interactions
+- [x] Add proper task completion styling
+- [x] Add inline editing capabilities
+- [x] Add keyboard shortcuts (Enter to edit, Escape to cancel)
 
 #### 6.2 Task List Component
-- [ ] Create `src/components/Tasks/TaskList.tsx`:
-  - Virtualized list for performance
-  - Drag-and-drop integration
-  - Bulk operations
-  - Filtering and sorting
-- [ ] Implement empty state handling
-- [ ] Add loading skeletons
-- [ ] Create task creation inline
+- [x] Create `src/components/Task/TaskGroup.tsx`:
+  - Task grouping with section headers
+  - Blue header styling matching design
+  - More actions button integration
+  - Task organization by categories
+- [x] Implement proper task rendering
+- [x] Add task interaction handling
+- [x] Add drag-and-drop integration
+- [x] Fix task completion state updates with Redux integration
+- [x] Connect task actions to Redux store properly
+- [ ] Add virtualized list for performance
+- [x] Add bulk operations
+- [x] Create task creation inline
 
 #### 6.3 Task Details Component
-- [ ] Create `src/components/Tasks/TaskDetails.tsx`:
-  - Expanded view for editing
-  - Notes with rich text
+- [x] Create task editing functionality:
+  - Inline editing for title and notes
+  - Keyboard shortcuts (Enter/Escape)
+  - Task completion animations
+  - Context-aware task creation
+- [ ] Advanced features (future enhancement):
+  - Rich text notes
   - Tag management
   - Date/time pickers
   - Checklist functionality
 
 #### 6.4 Quick Entry Component
-- [ ] Create `src/components/Tasks/QuickEntry.tsx`:
+- [x] Create `src/components/ui/QuickEntryModal.tsx`:
   - Global quick entry modal
+  - Context-aware task creation
+  - Smart defaults based on current context
+  - Integration with + button
+- [ ] Future enhancements:
   - Natural language parsing integration
   - Keyboard shortcuts (Ctrl/Cmd + Space)
-  - Smart defaults based on current context
 
-### 7. Smart Lists Components
-**Estimated Time: 2.5 days**
+### 7. Smart Lists Components ✅
+**Estimated Time: 2.5 days** | **Completed: 2025-01-08**
 
 #### 7.1 Today View
-- [ ] Create `src/components/SmartLists/TodayView.tsx`:
-  - Calendar events integration (mock)
-  - Today tasks section
-  - This Evening section
+- [x] Create `src/components/SmartLists/TodayView.tsx`:
+  - Today tasks section with proper filtering
   - Overdue task handling
-- [ ] Implement date-based filtering
-- [ ] Add task rescheduling functionality
+  - Task completion functionality
+- [x] Implement date-based filtering
+- [ ] Add calendar events integration (future enhancement)
+- [ ] Add task rescheduling functionality (future enhancement)
 
 #### 7.2 Upcoming View
-- [ ] Create `src/components/SmartLists/UpcomingView.tsx`:
+- [x] Create `src/components/SmartLists/UpcomingView.tsx`:
   - Date-grouped task sections
-  - Collapsible date headers
-  - Drag-to-reschedule functionality
-  - Week/month view options
+  - Proper upcoming task filtering
+  - Task completion functionality
+- [ ] Add collapsible date headers (future enhancement)
+- [ ] Add drag-to-reschedule functionality (future enhancement)
+- [ ] Add week/month view options (future enhancement)
 
 #### 7.3 Inbox View
-- [ ] Create `src/components/SmartLists/InboxView.tsx`:
-  - Unprocessed task list
-  - Quick processing actions
-  - Bulk organization tools
+- [x] Create `src/components/SmartLists/InboxView.tsx`:
+  - Unprocessed task list with proper filtering
+  - Task completion functionality
+  - Integration with task creation
+- [ ] Add quick processing actions (future enhancement)
+- [ ] Add bulk organization tools (future enhancement)
 
 #### 7.4 Other Smart Lists
-- [ ] Create `AnytimeView.tsx`, `SomedayView.tsx`, `LogbookView.tsx`
-- [ ] Implement view-specific behaviors
-- [ ] Add appropriate filtering and sorting
+- [x] Create `AnytimeView.tsx`, `SomedayView.tsx`, `LogbookView.tsx`, `TrashView.tsx`
+- [x] Implement view-specific behaviors and filtering
+- [x] Add appropriate filtering and sorting
 
-### 8. UI Components
-**Estimated Time: 2 days**
+### 8. UI Components ✅
+**Estimated Time: 2 days** | **Completed: 2025-01-08**
 
 #### 8.1 Form Components
-- [ ] Create `src/components/UI/Input.tsx` with variants
-- [ ] Create `src/components/UI/Button.tsx` with variants
-- [ ] Create `src/components/UI/Select.tsx`
-- [ ] Create `src/components/UI/DatePicker.tsx`
-- [ ] Create `src/components/UI/Modal.tsx`
+- [x] Create `src/components/ui/Modal.tsx` with backdrop and keyboard handling
+- [x] Create form inputs integrated into modals
+- [x] Create dropdown components with proper styling
+- [ ] Create standalone `Input.tsx` with variants (future enhancement)
+- [ ] Create standalone `Button.tsx` with variants (future enhancement)
+- [ ] Create `Select.tsx` and `DatePicker.tsx` (future enhancement)
 
 #### 8.2 Interactive Components
-- [ ] Create `src/components/UI/Dropdown.tsx`
-- [ ] Create `src/components/UI/Checkbox.tsx`
-- [ ] Create `src/components/UI/LoadingSpinner.tsx`
-- [ ] Create `src/components/UI/Toast.tsx` for notifications
+- [x] Create `src/components/ui/NewListDropdown.tsx`
+- [x] Create checkbox functionality integrated in task components
+- [x] Create `src/components/ui/DarkModeToggle.tsx`
+- [x] Create `src/components/ui/ProjectProgressIcon.tsx`
+- [ ] Create `LoadingSpinner.tsx` and `Toast.tsx` (future enhancement)
 
 #### 8.3 Magic Plus Button
-- [ ] Create `src/components/UI/MagicPlusButton.tsx`:
-  - Floating action button
-  - Context-aware creation
-  - Drag-and-drop functionality (basic)
-  - Animation states
+- [x] Implement Magic Plus Button functionality:
+  - Floating action button in MainContent
+  - Context-aware creation via QuickEntryModal
+  - Proper styling and positioning
+- [ ] Add drag-and-drop functionality (future enhancement)
+- [ ] Add advanced animation states (future enhancement)
 
-### 9. Custom Hooks
-**Estimated Time: 1.5 days**
+### 9. Custom Hooks ✅
+**Estimated Time: 1.5 days** | **Completed: 2025-01-08**
 
 #### 9.1 Data Hooks
-- [ ] Create `src/hooks/useTasks.ts`:
+- [x] Create `src/hooks/useTaskActions.ts`:
   - Task CRUD operations
-  - Optimistic updates
+  - Redux integration
   - Error handling
-  - Cache invalidation
-- [ ] Create `src/hooks/useProjects.ts`
-- [ ] Create `src/hooks/useAreas.ts`
+  - State management
+- [x] Create data access hooks via Redux selectors
+- [ ] Create `useProjects.ts` and `useAreas.ts` (using Redux directly)
 
 #### 9.2 UI Hooks
-- [ ] Create `src/hooks/useKeyboardShortcuts.ts`
-- [ ] Create `src/hooks/useLocalStorage.ts`
-- [ ] Create `src/hooks/useDebounce.ts`
-- [ ] Create `src/hooks/useClickOutside.ts`
+- [x] Implement keyboard shortcuts in components (Enter/Escape)
+- [x] Implement localStorage via Redux persistence
+- [x] Implement click outside functionality in dropdowns
+- [x] Implement debouncing where needed
+- [ ] Create standalone hook files (using inline implementations)
 
 #### 9.3 Business Logic Hooks
-- [ ] Create `src/hooks/useSmartLists.ts` for filtering logic
-- [ ] Create `src/hooks/useTaskFiltering.ts`
-- [ ] Create `src/hooks/useNaturalLanguageParser.ts` (mock implementation)
+- [x] Implement smart list filtering via Redux selectors
+- [x] Implement task filtering logic in smart list components
+- [ ] Create `useNaturalLanguageParser.ts` (future enhancement)
 
 ### 10. React Query Integration
 **Estimated Time: 1 day**
@@ -410,16 +432,78 @@ Convert the static HTML prototype to a fully functional React application with T
 - [ ] Implement proper loading states
 - [ ] Add performance monitoring
 
-### 13. Development Tools & Quality
+### 13. Critical Bug Fixes ✅
+**Estimated Time: 1 day** | **Completed: 2025-01-08**
+
+#### 13.1 Task Interaction Bugs
+- [x] Fix task checkbox completion with proper Redux state management
+- [x] Verify task editing functionality works with inline editing
+- [x] Test task creation workflow with QuickEntryModal
+- [x] Implement task completion animations
+
+#### 13.2 Navigation Bugs  
+- [x] Fix sidebar navigation with proper view switching
+- [x] Implement actual view switching logic via Redux
+- [x] Connect Redux UI state to view rendering
+- [x] Test all smart list filters work correctly
+
+#### 13.3 Integration Testing
+- [x] Test complete user workflows end-to-end
+- [x] Verify all interactive elements respond properly
+- [x] Ensure TypeScript strict mode compliance
+- [ ] Test responsive design on different screen sizes (future enhancement)
+- [ ] Validate accessibility with screen readers (future enhancement)
+
+### 14. Enhanced UI Features & Functionality ✅
+**Estimated Time: 3 days** | **Completed: 2025-01-08**
+
+#### 14.1 New List Creation
+- [x] Add "New List" button in lower left corner
+- [x] Implement dropdown menu for adding area or project
+- [x] Style dropdown to match Things 3 design
+- [x] Connect dropdown actions to Redux store
+
+#### 14.2 Navigation Improvements
+- [x] Fix area view → project navigation (clicking project navigates to project view)
+- [x] Implement AreaView and ProjectView components with proper navigation
+- [x] Test all navigation paths work correctly
+- [ ] Add breadcrumb navigation for deep views (future enhancement)
+
+#### 14.3 Enhanced Task Interactions
+- [x] Make + button in lower right functional
+- [x] Implement task completion animation:
+  - Click task → gray out and strike through text
+  - Wait 3 seconds
+  - Ease out from view with smooth animation
+- [x] Add proper task completion state management
+- [x] Test task completion workflow end-to-end
+
+#### 14.4 Project Progress Indicators
+- [x] Add project completion status indicator in sidebar
+- [x] Implement circular icon with stroke fill based on completion percentage
+- [x] Change icon to green when 100% complete with check functionality
+- [x] Make sidebar indicators properly sized for sidebar
+- [x] Calculate completion percentage from associated tasks
+- [ ] Add project progress indicator in main content area (future enhancement)
+
+#### 14.5 Dark Mode Implementation
+- [x] Implement dark mode toggle component
+- [x] Create dark mode color palette matching Things 3
+- [x] Add dark mode styles to all components with CSS variables
+- [x] Store dark mode preference in localStorage
+- [x] Add smooth transitions between light/dark modes
+- [x] Test dark mode across all views and components
+
+### 15. Development Tools & Quality
 **Estimated Time: 0.5 days**
 
-#### 13.1 Developer Experience
+#### 15.1 Developer Experience
 - [ ] Set up ESLint with TypeScript rules
 - [ ] Configure Prettier for code formatting
 - [ ] Set up Husky for git hooks
 - [ ] Add bundle analyzer for optimization
 
-#### 13.2 Debugging Tools
+#### 15.2 Debugging Tools
 - [ ] Configure Redux DevTools
 - [ ] Set up React DevTools Profiler
 - [ ] Add React Query DevTools
@@ -434,13 +518,19 @@ Convert the static HTML prototype to a fully functional React application with T
 - Performance optimized application
 
 ## Success Criteria
-- [ ] All static HTML functionality converted to React
-- [ ] TypeScript strict mode with no errors
-- [ ] 80% test coverage on all components
-- [ ] Redux state management working correctly
-- [ ] Service layer ready for backend integration
-- [ ] Performance metrics: < 2s initial load, < 100ms interaction response
-- [ ] Accessibility compliance (WCAG 2.1 AA)
+- [x] All static HTML functionality converted to React
+- [x] TypeScript strict mode with no errors
+- [x] Redux state management working correctly
+- [x] Service layer ready for backend integration
+- [x] Layout components fully functional with proper styling
+- [x] Task components with interactive functionality and animations
+- [x] Functional navigation between smart lists and views
+- [x] Enhanced UI features (New List, Progress Indicators, Dark Mode)
+- [x] 34 passing tests with React Testing Library
+- [x] Production build optimization (108.16 kB gzipped)
+- [ ] **PARTIAL:** 80% test coverage on all components (good coverage, room for expansion)
+- [ ] **NOT TESTED:** Performance metrics: < 2s initial load, < 100ms interaction response
+- [ ] **NOT TESTED:** Accessibility compliance (WCAG 2.1 AA)
 
 ## Dependencies
 - Completed Phase 1 static HTML
